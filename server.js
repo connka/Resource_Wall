@@ -1,7 +1,6 @@
 "use strict";
 
 require('dotenv').config();
-var cookieSession = require('cookie-session')
 var express = require('express')
 
 const PORT        = process.env.PORT || 8080;
@@ -15,6 +14,8 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const cookieSession = require('cookie-session');
+
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -31,6 +32,12 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: "session",
+  keys: ["key1", "key2]"],
+//Cookie options (24 hours)
+  maxAge: 24 * 60 * 1000, 
+}));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
@@ -40,6 +47,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+//Default port
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
