@@ -1,0 +1,26 @@
+#### Link to projet requirements: (https://web-compass.lighthouselabs.ca/projects/w4-midterm-proj);
+
+1) Install postman for sending request without frontend.
+2) Fireframe
+3) ERD
+4) Define routes
+
+
+#### TABLES FOR DATABASE ####
+- users  
+    // id(PK),username,password,created_at
+- profile
+    // id(PK),id(users)FK,name,email,intrests,created_at,last_updated_at 
+- intrests  
+    // id(PK),name 
+- resourses 
+    // id(PK),url,title,description,created_at,last_updated_at
+-user_intrests
+    // id(PK),id(users)FK,id(intrests)FK
+- user_resourse 
+    // id(PK),id(users)FK,id(resourses)FK
+- user_likes 
+    //id(PK), id(users)FK,id(resourses)FK,created_at,last_updated_at
+- user_comments
+    // id(PK),text, id(users)FK , id(resourses)FK ,created_at,last_updated_at 
+  
