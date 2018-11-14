@@ -1,14 +1,11 @@
 const db = require(TODO:);
-const users = require('../server/userDB');
+const users = require('../server/TODO:');
 const helpers = require('../helpers/functions');
-
 
 const genRang = helpers.rng;
 const checkExist = helpers.checkExist;
 const isEmpty = helpers.isEmpty;
 const checkLogin = helpers.checkLogin;
-const innerDB = helpers.innerUrls;
-
 
 /**
  * @param {req} HTTP Object
