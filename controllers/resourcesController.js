@@ -26,7 +26,7 @@ exports.render_resources = (req, res) => {
    * If All params are good render the Update page
    */
   exports.render_id = (req, res) => {
-    dbInner = TODO: 
+    dbInner = //TODO: 
     console.log(session)
     if (this.testVar) {
       res.render('show', {val: req.params.id, longVal: db['cookie']['cookie1'], cookie: cookie});
