@@ -7,18 +7,18 @@
 
 %%% GET %%%%
 
-/register  - renders the regiser page 
-/login  - render login page
+/register  - renders the regiser page    ----- done
+/login  - render login page      ------- done
 /:id/profile = render profile if session- cookie
-/:id/resourses  all owned resourses
-/:id/like   all liked ones 
+/:id  all owned / liked resourses  ------- done
+/:id/like   all liked ones  
 /:id/comment all liked ones 
 /:id/rate   all liked ones 
 
 %%% POST %%%%
-/login -  login USERS
-/register - register a new USERS
-/logout - logout a user and redirect 
+/login -  login USERS  ----- done
+/register - register a new USERS   ----- done 
+/logout - logout a user and redirect   ------- done
 
 
 /:id/resourses/  to add 
@@ -48,7 +48,8 @@
 
 %%%%% GET ROUTES %%%% 
 
-/resourses -  all resourses back
+/resourses -  all resourses back   ------- done
+/resourses/:id  -  one resurse by id  ------ done
 /resourses/intrests/:id -  all resourses by intrests
 /resourses/rate/ -  all resourses by rating
 /resourses/created_at/ -  all resourses by created_at
