@@ -4,8 +4,8 @@
 </head>
 <body>
         <% if (user_id) { %>
-        <form action="/logout" method="POST">
-            <label for="user"> <%= username %> </label>
+        <form action="/api/users/logout" method="POST">
+            <label for="user"> <%= user_id %> </label>
             <input type="submit" value="Logout">
         </form>
         <% } 
