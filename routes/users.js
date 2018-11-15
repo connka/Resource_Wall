@@ -91,7 +91,8 @@ module.exports = knex => {
       })
       .catch(err => {
         console.log(err);
-        res.status(404).send('Mesaage : 404 :No resourses found');
+        // res.status(404).send('Mesaage : 404 :No resourses found');
+        res.status(302).redirect('/');
       });
   });
 
