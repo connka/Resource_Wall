@@ -54,7 +54,9 @@ app.use('/api/resourses', resoursesRoutes(knex));
 
 // Home page
 app.get('/', (req, res) => {
-  res.render('index');
+  const user_id = req.session.user_id;
+  console.log("USER IS", user_id)
+  res.render('index',{user_id});
 });
 
 app.listen(PORT, () => {
