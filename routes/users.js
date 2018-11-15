@@ -7,19 +7,6 @@ const bcrypt = require('bcrypt');
 module.exports = knex => {
   // -------- ALL GET ROUTES ----------
 
-  // @route   GET api/users/
-  // @desc    gets all users
-  // @access  Public
-
-  // router.get('/', (req, res) => {
-  //   knex
-  //     .select('*')
-  //     .from('users')
-  //     .then(results => {
-  //       res.json(results);
-  //     });
-  // });
-
   // @route   GET api/users
   // @desc    gets all users
   // @access  Public
@@ -49,6 +36,10 @@ module.exports = knex => {
   router.get('/login', (req, res) => {
     res.status(200).render('login');
   });
+
+  // @route   GET api/users/:id/resourses
+  // @desc    return all resourses of a user
+  // @access  Private
 
   // ============= POST REQUESTS ==================== //
 
@@ -83,8 +74,9 @@ module.exports = knex => {
     res.status(200).redirect('/');
   });
 
-  // route to register a user , check if id,email are avialabe ,and email and password fields are not let empty by user .
-  //route : "/register"
+  // @route   POST api/users/register
+  // @desc  registers new users
+  // @access  Public
   router.post('/register', (req, res) => {
     const { username, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
@@ -101,7 +93,9 @@ module.exports = knex => {
       })
       .catch(err => {
         console.error('FROM catch:', err.message);
-        res.status(400).send(err.message);
+        res
+          .status(400)
+          .send('Mesaage : 400 : Bad request : username or password');
       });
   });
 
