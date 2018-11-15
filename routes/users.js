@@ -29,6 +29,50 @@ module.exports = knex => {
       res.redirect('/login');
     }
   });
+
+  // @route   GET api/users/:id/like
+  // @desc    gets current user
+  // @access  Private
+  router.get('/:id/like', (req, res) => {
+    const { id } = req.params;
+    console.log('GET /:id:', id);
+    knex
+      .select('*')
+      .from('resourses')
+      .join('user_likes', 'resourses.id', 'user_likes.resourse_id')
+      .join('users', 'users.id', 'user_likes.user_id')
+      //.where('user_like.user_id', id)
+      //.join('resourses', 'user_resourses.resourse_id', 'resourses.id')
+      .then(resourses => {
+        res.status(200).send(resourses);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(404).send('Mesaage : 404 :No resourses found');
+      });
+  });
+  // @route   GET api/users/:id/comment
+  // @desc    gets current users commented resourses
+  // @access  Private
+  router.get('/:id/comment', (req, res) => {
+    const { id } = req.params;
+    console.log('GET /:id:', id);
+    knex
+      .select('*')
+      .from('resourses')
+      .join('user_comment', 'resourses.id', 'user_comment.resourse_id')
+      .join('users', 'users.id', 'user_likes.user_id')
+      //.where('user_like.user_id', id)
+      //.join('resourses', 'user_resourses.resourse_id', 'resourses.id')
+      .then(resourses => {
+        res.status(200).send(resourses);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(404).send('Mesaage : 404 :No resourses found');
+      });
+  });
+
   // @route   GET api/users/:id
   // @desc    gets current user
   // @access  Private
@@ -39,6 +83,7 @@ module.exports = knex => {
     knex
       .select('*')
       .from('user_resourses')
+      .join('users', 'users.id')
       .join('user_likes', 'user_resourses.user_id', 'user_likes.user_id')
       .join('resourses', 'user_resourses.resourse_id', 'resourses.id')
       .then(resourses => {
@@ -83,13 +128,15 @@ module.exports = knex => {
     knex
       .select()
       .from('users')
-      .where('username', username)
+      .where({
+        username: username
+      })
       //.returning(['id', 'username'])
       .then(user => {
         console.log('POST /login:', user[0]);
         if (bcrypt.compareSync(password, user[0].password)) {
           console.log('POST /login: inside bcrypt', user[0]);
-          req.session.user_id = user.id;
+          req.session.user_id = user.username;
           res.status(200).redirect(`/api/users/${user[0].id}`);
         }
       })
@@ -120,7 +167,7 @@ module.exports = knex => {
       })
       .then(user => {
         console.log('REturn user:', user[0]);
-        req.session.user_id = user[0].id;
+        req.session.user_id = user[0].username;
         res.status(201).redirect(`/api/users/${user[0].id}`);
       })
       .catch(err => {
