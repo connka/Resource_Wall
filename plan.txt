@@ -10,7 +10,7 @@
 - users  
     // id(PK),username,password,created_at
 - profile
-    // id(PK),id(users)FK,name,email,intrests,created_at,last_updated_at 
+    // id(PK),id(users)FK,name,email,intrests,location,created_at,last_updated_at 
 - intrests  
     // id(PK),name 
 - resourses 
