@@ -50,9 +50,9 @@
 
 /resourses -  all resourses back   ------- done
 /resourses/:id  -  one resurse by id  ------ done
-/resourses/intrests/:id -  all resourses by intrests
-/resourses/rate/ -  all resourses by rating
-/resourses/created_at/ -  all resourses by created_at
+/resourses/intrests/:id -  all resourses by intrests  ------ done
+/resourses/rate/ -  all resourses by rating ----- done
+/resourses/created/ -  all resourses by created_at  ------- done 
 
 
 
