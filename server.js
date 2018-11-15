@@ -1,7 +1,7 @@
 "use strict";
 
 require('dotenv').config();
-var express = require('express')
+const express = require('express')
 
 const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
@@ -46,6 +46,12 @@ app.use("/api/users", usersRoutes(knex));
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+// Resources page
+
+// Registration page
+
+// User page
 
 //Default port
 app.listen(PORT, () => {
