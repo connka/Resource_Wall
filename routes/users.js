@@ -83,7 +83,7 @@ module.exports = knex => {
     knex
       .select()
       .from('users')
-      .where('username', username)
+      .where({'username': username})
       //.returning(['id', 'username'])
       .then(user => {
         console.log('POST /login:', user[0]);
@@ -94,7 +94,8 @@ module.exports = knex => {
         }
       })
       .catch(err => {
-        res.status(403).send('Mesaage : 403 : Invalid username or password');
+        console.log("ERROR IS", err)
+        res.status(403).send('Mesaage: 403: Invalid username or password');
       });
   });
 
@@ -127,7 +128,7 @@ module.exports = knex => {
         console.error('FROM catch:', err.message);
         res
           .status(400)
-          .send('Mesaage : 400 : Bad request : username or password');
+          .send('Message: 400: Bad request: username or password');
       });
   });
 
