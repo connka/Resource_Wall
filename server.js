@@ -53,6 +53,8 @@ app.get("/", (req, res) => {
 
 // User page
 
+// Logout page
+
 //Default port
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
