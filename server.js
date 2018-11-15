@@ -43,6 +43,7 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+  //res.redirect("resources");
 });
 
 // Resources Wall
@@ -65,11 +66,41 @@ app.get("/login", (req, res) => {
   res.redirect("/user/:id"); 
 });
 
-// ###### PUT #####
+// Error Page
+//User error
+app.get("/error", (req, res) => {
+  res.render("error");
+});
+
+
+// ###### POST #####
 
 // Login 
 app.post("/login", (req, res) => {
-  res.redirect("/resources");
+  let email = req.body["email"];
+  let password = req.body["password"];
+  if (!email || !password) {
+    res.redirect("/error");
+  }
+  let id;
+  for (user_id in users) {
+    if (!users.hasOwnProperty(user_id)) {
+      continue;
+    }
+    if (
+      email === users[user_id]["email"] &&
+      password === users[user_password]["password"]
+    ) {
+      id = user_id;
+      break;
+    }
+  }
+  if (id) {
+    req.session.user_id = id;
+    res.redirect("/resources");
+  } else {
+    res.redirect("/error");
+  }
 });
 
 // Registration
@@ -82,16 +113,17 @@ app.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// Edit Users Profile
+// Edit Users Handler
 app.post("/user/:id", (req, res) => {
   res.render("user_edit");
 });
 
-// Post New Resource 
+// New Resource Handler
 app.post("/resources", (req, res) => {
   res.redirect("resources");
 });
 
+// Port Listener
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
