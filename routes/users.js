@@ -89,7 +89,7 @@ module.exports = knex => {
       .then(user => {
         console.log('REturn user:', user[0]);
         req.session.user_id = user[0].id;
-        res.status(201).redirect('/');
+        res.status(201).redirect(`/api/users/${user[0].id}`);
       })
       .catch(err => {
         console.error('FROM catch:', err.message);

@@ -1,0 +1,59 @@
+##### HOME ROUTE #####
+ %%% GET REQUEST %%%%
+
+/ - all resourses by limit /
+
+#### USERS ROUTES #####
+
+%%% GET %%%%
+
+/register  - renders the regiser page 
+/login  - render login page
+/:id/profile = render profile if session- cookie
+/:id/resourses  all owned resourses
+/:id/like   all liked ones 
+/:id/comment all liked ones 
+/:id/rate   all liked ones 
+
+%%% POST %%%%
+/login -  login USERS
+/register - register a new USERS
+/logout - logout a user and redirect 
+
+
+/:id/resourses/  to add 
+/:id/resouses/:id/like  to add 
+/:id/resouses/:id/comment to add 
+/:id/resouses/:id/rate to add 
+
+%%% PUT %%%%
+/:id/profile    update profile
+/:id/resourses/:id  update resourse
+/:id/resouses/:id/like   update like    ----- optional 
+/:id/resouses/:id/comment update comment
+/:id/resouses/:id/rate update rating
+
+    
+%%% DELETE %%%%
+/:id/profile    delete profile  ------ optional
+/:id/resourses/:id          delete resourse
+/:id/resouses/:id/like      delete like
+/:id/resouses/:id/comment    delete comment
+/:id/resouses/:id/rating     rating delete
+
+
+
+
+#### RESOURSES ROUTES ####
+
+%%%%% GET ROUTES %%%% 
+
+/resourses -  all resourses back
+/resourses/intrests/:id -  all resourses by intrests
+/resourses/rate/ -  all resourses by rating
+/resourses/created_at/ -  all resourses by created_at
+
+
+
+
+
