@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        </head>
+                <p style= "font-family:'Raleway', sans-serif;font-size:25px">Resources
+        <body style="font-size:20px; padding:50px;">
+                <form action="/resources" method="POST" style="font-family:'Raleway', sans-serif; width: 300px">
+                        <label for="newResource" style="font-family:'Raleway', sans-serif">Add a new resource:</label>
+                        <input id="name" type="text" name="name" placeholder="Name">
+                        <input id="newResource" type="text" name="newResource" placeholder="http://">
+                        <button class="dropbtn" id="category" type="dropbtn" name="category">Category</button>
+                            <div class="dropdown-content">
+                            </div>
+                            <button id="type" type="dropbtn" class="dropbtn" name="type">Type</button>
+                            <div class="dropdown-content">
+                            </div>
+                        <input id="description" type="text" name="description" placeholder="Say a few words about the resource">
+                        <input type="submit" style="font-family:'Raleway', sans-serif" value="Submit">
+                </form>
+
+                <p style= "font-family:'Raleway', sans-serif;font-size:20px">Here we will list all the resources</p>
+        </body>
+</html>
