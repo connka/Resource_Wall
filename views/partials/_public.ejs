@@ -3,21 +3,19 @@
 <head>
 </head>
 <body>
-    <% if (!user_id) { %>
-        <button type="button" class="btn" method="GET" action="/partials/_login">
+        <% if (user_id) { %>
+        <form action="/logout" method="POST">
+            <label for="user"> <%= username %> </label>
+            <input type="submit" value="Logout">
+        </form>
+        <% } 
+        else { %>    
+        <form method="GET" action="/login">
             <input type="submit" value="Login">
-        </button>
-        <button type="button" class="btn" method="GET" action="/partials/_register">
+          </form>
+          <form method="GET" action="/register">
             <input type="submit" value="Register">
-        </button>
-    <% } 
-    
-    else { %>
-    }<form action="/logout" method="POST">
-        <label for="user"> <%= user_id %> </label>
-        <input type="submit" value="Logout">
-    </form>
-    <% } %>
-
+          </form>
+          <% } %>
 </body>
 </html>
