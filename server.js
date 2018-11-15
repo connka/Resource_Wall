@@ -38,9 +38,53 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
+// ##### GET #####
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+// Resources Wall
+app.get("/resources", (req, res) => {
+  res.render("resources");
+});
+
+// Registration
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+// Users Page
+app.get("/user/:id", (req, res) => {
+  res.render("user");
+});
+
+// ###### PUT #####
+
+// Login 
+app.post("/login", (req, res) => {
+  res.redirect("/resources");
+});
+
+// Registration
+app.post("/register", (req, res) => {
+  res.redirect("/register");
+});
+
+// Logout
+app.post("/logout", (req, res) => {
+  res.redirect("/");
+});
+
+// Edit Users Profile
+app.post("/user/:id", (req, res) => {
+  res.render("user_edit");
+});
+
+// Post New Resource 
+app.post("/resources", (req, res) => {
+  res.redirect("resources");
 });
 
 app.listen(PORT, () => {
