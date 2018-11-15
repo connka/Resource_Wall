@@ -8,17 +8,46 @@ module.exports = knex => {
   // -------- ALL GET ROUTES ----------
 
   // @route   GET api/users
-  // @desc    gets all users
+  // @desc    check for currentUser else redirect to login
   // @access  Public
 
   router.get('/', (req, res) => {
-    //const user_id = req.session.user_id;
+    const user_id = req.session.user_id;
+    console.log('From users/:', user_id);
     if (user_id) {
-      res.redirect('/');
+      knex
+        .select()
+        .from('users')
+        .where('id', user_id)
+        .returning(['id', 'username'])
+        .then(user => {
+          console.log('Inside user:', user[0]);
+          res.redirect(`/api/users/${user[0].id}`);
+        });
     } else {
       req.session = null;
       res.redirect('/login');
     }
+  });
+  // @route   GET api/users/:id
+  // @desc    gets current user
+  // @access  Private
+
+  router.get('/:id', (req, res) => {
+    const { id } = req.params;
+    console.log('GET /:id:', id);
+    knex
+      .select('*')
+      .from('user_resourses')
+      .join('user_likes', 'user_resourses.user_id', 'user_likes.user_id')
+      .join('resourses', 'user_resourses.resourse_id', 'resourses.id')
+      .then(resourses => {
+        res.status(200).send(resourses);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(404).send('Mesaage : 404 :No resourses found');
+      });
   });
 
   // @route   GET api/users/register
@@ -49,16 +78,19 @@ module.exports = knex => {
 
   router.post('/login', (req, res) => {
     const { username, password } = req.body;
-    console.log('body', req.body);
+    console.log('POST /login : req.body', req.body);
+
     knex
       .select()
       .from('users')
       .where('username', username)
-      .returning(['id', 'username'])
+      //.returning(['id', 'username'])
       .then(user => {
+        console.log('POST /login:', user[0]);
         if (bcrypt.compareSync(password, user[0].password)) {
+          console.log('POST /login: inside bcrypt', user[0]);
           req.session.user_id = user.id;
-          res.status(200).send(user[0]);
+          res.status(200).redirect(`/api/users/${user[0].id}`);
         }
       })
       .catch(err => {
