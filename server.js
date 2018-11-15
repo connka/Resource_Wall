@@ -60,6 +60,11 @@ app.get("/user/:id", (req, res) => {
   res.render("user");
 });
 
+// Login
+app.get("/login", (req, res) => {
+  res.redirect("/user/:id"); 
+});
+
 // ###### PUT #####
 
 // Login 
