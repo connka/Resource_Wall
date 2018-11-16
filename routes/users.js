@@ -56,6 +56,27 @@ module.exports = knex => {
     console.log('GET /:id:', id);
     knex
       .select('*')
+      .from('users')
+      .where('id', id)
+      .then(user => {
+        res.status(200).send({ id: user.id, username: user.username });
+      })
+      .catch(err => {
+        console.log(err);
+        // res.status(404).send('Mesaage : 404 :No user found');
+        res.status(302).redirect('/');
+      });
+  });
+
+  // @route   GET api/users/:id
+  // @desc    gets current user
+  // @access  Private
+
+  router.get('/:id/resourse', (req, res) => {
+    const { id } = req.params;
+    console.log('GET /:id:', id);
+    knex
+      .select('*')
       .from('user_resourses')
       .join('users', 'users.id', 'user_resourses.user_id')
       .join('user_likes', 'user_resourses.user_id', 'user_likes.user_id')
@@ -76,14 +97,13 @@ module.exports = knex => {
   router.get('/:id/profile', (req, res) => {
     const { id } = req.params;
     console.log(req.session.user_id);
-
     if (id == req.session.user_id) {
       knex
         .select('*')
         .from('profiles')
         .where('user_id', id)
         .then(profile => {
-          res.status(200).render('userpage',profile);
+          res.status(200).send(profile);
         })
         .catch(err => {
           console.log(err);

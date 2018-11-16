@@ -1,11 +1,61 @@
 $font-stack: Helvectica, sans-serif;
-$primary-color: #F0F8FF;
+$primary-color: #e3e0cf;
+$color: #c5d5cb;
 
+html {
+  background-color: #e3e0cf;
+}
 
 body {
-  background-color: #EEE;
-
-  h1 {
-    color: #244751;
-  }
+  background-color: #e3e0cf;
 }
+
+.navbar-title {
+  font-size: 200%;
+}
+
+.container-fluid {
+  background-color: #9fa8a3;
+  color: black;
+}
+.col-md-2 {
+  float: right;
+}
+
+.userIn {
+  font-size: 100%;
+}
+
+#search-bar {
+  width: 75%;
+  float: right;
+  margin-right: 0%;
+  background-color: #e3e0cf;
+}
+
+.my_toggle {
+  background-color: #e3e0cf;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:active {
+  color: black;
+}
+
+
+

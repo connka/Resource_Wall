@@ -8,7 +8,8 @@ exports.up = function(knex, Promise) {
     table
       .integer('resourse_id')
       .references('id')
-      .inTable('resourses');
+      .inTable('resourses')
+      .onDelete('cascade');
     table.unique(['user_id', 'resourse_id']);
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());

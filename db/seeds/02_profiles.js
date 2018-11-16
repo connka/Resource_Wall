@@ -25,6 +25,27 @@ exports.seed = function(knex, Promise) {
           name: 'user3',
           email: 'user3@example.com',
           location: 'calgary'
+        },
+        {
+          id: 4,
+          user_id: '4',
+          name: 'user4',
+          email: 'user4@example.com',
+          location: 'calgary'
+        },
+        {
+          id: 5,
+          user_id: '5',
+          name: 'user5',
+          email: 'user5@example.com',
+          location: 'calgary'
+        },
+        {
+          id: 6,
+          user_id: '6',
+          name: 'user6',
+          email: 'user6@example.com',
+          location: 'calgary'
         }
       ]);
     });

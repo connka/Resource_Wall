@@ -8,9 +8,24 @@ module.exports = knex => {
   // @desc  returns all resourses
   // @access  Public
 
+  // router.get('/', (req, res) => {
+  //   knex('resourses')
+  //     .select(['url', 'title', 'description', 'intrest_id'])
+  //     .then(results => {
+  //       res.status(200).send(results);
+  //     })
+  //     .catch(err => {
+  //       console.error(err.message);
+  //       res.status(500).send('Mesaage : 500 : Internal server error');
+  //     });
+  // });
+
   router.get('/', (req, res) => {
     knex('resourses')
-      .select(['url', 'title', 'description', 'intrest_id'])
+      .select('*')
+      .leftJoin('user_comments', 'resourses.id', 'user_comments.resourse_id')
+      .leftJoin('user_likes', 'resourses.id', 'user_likes.resourse_id')
+      .leftJoin('user_rating', 'resourse.id', 'user_rating.resourse_id')
       .then(results => {
         res.status(200).send(results);
       })
