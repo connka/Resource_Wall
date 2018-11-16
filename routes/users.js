@@ -204,5 +204,31 @@ module.exports = knex => {
       });
   });
 
+  // @route   POST api/users/register
+  // @desc  registers new users
+  // @access  Public
+  router.post('/:id/resourse', (req, res) => {
+    const { url, title, description, intrest_id } = req.body;
+    knex('resourses')
+      .insert({
+        url,
+        title,
+        description,
+        insert_id
+      })
+      .then(resourse => {
+        console.log(resourse);
+        knex('user_resourses').insert({});
+      })
+      // .then(resourse => {
+      //   req.session.user_id = user[0].username;
+      //   res.status(201).redirect(`/api/users/${user[0].id}`);
+      // })
+      .catch(err => {
+        console.error('FROM catch:', err.message);
+        res.status(400).send('Message: 400: Bad request: username or password');
+      });
+  });
+
   return router;
 };
