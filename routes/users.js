@@ -30,6 +30,32 @@ module.exports = knex => {
     }
   });
 
+  // @route   GET api/users/:id/rate
+  // @desc    gets all rated by  current user
+  // @access  Private
+  router.get('/:id/rate', (req, res) => {
+    const { id } = req.params;
+    console.log('GET /:id:', id);
+    knex
+      .select('*')
+      .from('resourses')
+      .join(
+        'user_resourse_rating',
+        'resourses.id',
+        'user_resourse_rating.resourse_id'
+      )
+      //.join('users', 'users.id', 'user_resourse_rating.user_id')
+      .where('user_resourse_rating.user_id', id)
+      //.join('resourses', 'user_resourses.resourse_id', 'resourses.id')
+      .then(resourses => {
+        res.status(200).send(resourses);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(404).send('Mesaage : 404 :No resourses found');
+      });
+  });
+
   // @route   GET api/users/:id/like
   // @desc    gets current user
   // @access  Private
@@ -40,8 +66,8 @@ module.exports = knex => {
       .select('*')
       .from('resourses')
       .join('user_likes', 'resourses.id', 'user_likes.resourse_id')
-      .join('users', 'users.id', 'user_likes.user_id')
-      //.where('user_like.user_id', id)
+      //.join('users', 'users.id', 'user_likes.user_id')
+      .where('user_likes.user_id', id)
       //.join('resourses', 'user_resourses.resourse_id', 'resourses.id')
       .then(resourses => {
         res.status(200).send(resourses);
@@ -56,13 +82,13 @@ module.exports = knex => {
   // @access  Private
   router.get('/:id/comment', (req, res) => {
     const { id } = req.params;
-    console.log('GET /:id:', id);
+    console.log('GET /:id', id);
     knex
       .select('*')
       .from('resourses')
-      .join('user_comment', 'resourses.id', 'user_comment.resourse_id')
-      .join('users', 'users.id', 'user_likes.user_id')
-      //.where('user_like.user_id', id)
+      .innerJoin('user_comments', 'resourses.id', 'user_comments.resourse_id')
+      //.innerJoin('users', 'users.id', 'user_comments.user_id')
+      .where('user_comments.user_id', id)
       //.join('resourses', 'user_resourses.resourse_id', 'resourses.id')
       .then(resourses => {
         res.status(200).send(resourses);
@@ -129,7 +155,9 @@ module.exports = knex => {
     knex
       .select()
       .from('users')
-      .where({ username: username })
+      .where({
+        username: username
+      })
       //.returning(['id', 'username'])
       .then(user => {
         console.log('POST /login:', user[0]);
