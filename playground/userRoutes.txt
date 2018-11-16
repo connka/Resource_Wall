@@ -37,9 +37,9 @@
 %%% DELETE %%%%
 /:id/profile    delete profile  ------ optional
 /:user_id/resourses/:resourse_id  delete a resourse 
-/:id/resouses/:id/like      delete like
-/:id/resouses/:id/comment    delete comment
-/:id/resouses/:id/rating     rating delete
+/:id/resouses/:id/like      delete like   ---- cascade
+/:id/resouses/:id/comment    delete comment  ---- cascade 
+/:id/resouses/:id/rating     rating delete   ---- cascade
 
 
 
