@@ -23,10 +23,11 @@ module.exports = knex => {
         .then(user => {
           console.log('Inside user:', user[0]);
           res.redirect(`/api/users/${user[0].id}`);
+          // .render('login')
         });
     } else {
       req.session = null;
-      res.redirect('/login');
+      res.redirect(`/api/users/login`);
     }
   });
 
@@ -44,6 +45,29 @@ module.exports = knex => {
 
   router.get('/login', (req, res) => {
     res.status(200).render('login');
+  });
+
+  // @route   GET api/users/:id
+  // @desc    gets current user
+  // @access  Private
+
+  router.get('/:id', (req, res) => {
+    const { id } = req.params;
+    console.log('GET /:id:', id);
+    knex
+      .select('*')
+      .from('user_resourses')
+      .join('users', 'users.id', 'user_resourses.user_id')
+      .join('user_likes', 'user_resourses.user_id', 'user_likes.user_id')
+      .join('resourses', 'user_resourses.resourse_id', 'resourses.id')
+      .then(resourses => {
+        res.status(200).send(resourses);
+      })
+      .catch(err => {
+        console.log(err);
+        // res.status(404).send('Mesaage : 404 :No resourses found');
+        res.status(302).redirect('/');
+      });
   });
 
   // @route   GET api/users/:id/rate
@@ -115,29 +139,6 @@ module.exports = knex => {
       });
   });
 
-  // @route   GET api/users/:id
-  // @desc    gets current user
-  // @access  Private
-
-  router.get('/:id', (req, res) => {
-    const { id } = req.params;
-    console.log('GET /:id:', id);
-    knex
-      .select('*')
-      .from('user_resourses')
-      .join('users', 'users.id')
-      .join('user_likes', 'user_resourses.user_id', 'user_likes.user_id')
-      .join('resourses', 'user_resourses.resourse_id', 'resourses.id')
-      .then(resourses => {
-        res.status(200).send(resourses);
-      })
-      .catch(err => {
-        console.log(err);
-        // res.status(404).send('Mesaage : 404 :No resourses found');
-        res.status(302).redirect('/');
-      });
-  });
-
   // @route   GET api/users/:id/resourses
   // @desc    return all resourses of a user
   // @access  Private
@@ -163,7 +164,9 @@ module.exports = knex => {
         console.log('POST /login:', user[0]);
         if (bcrypt.compareSync(password, user[0].password)) {
           console.log('POST /login: inside bcrypt', user[0]);
-          req.session.user_id = user.username;
+
+          req.session.user_id = user[0].id;
+          console.log('From login:', user.username);
           res.status(200).redirect(`/api/users/${user[0].id}`);
         }
       })
@@ -194,8 +197,9 @@ module.exports = knex => {
         password: hashedPassword
       })
       .then(user => {
-        console.log('REturn user:', user[0]);
-        req.session.user_id = user[0].username;
+        console.log('sEtting cookie in register:', user[0].id);
+
+        req.session.user_id = user[0].id;
         res.status(201).redirect(`/api/users/${user[0].id}`);
       })
       .catch(err => {
