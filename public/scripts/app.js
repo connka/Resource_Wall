@@ -48,7 +48,7 @@ function renderUsers(users) {
 function loadUsers(callback) {
   $.ajax({
       method: 'GET',
-      url: '/api/users/:id/profile', 
+      url: '/api/users/:id/', 
       success: users => {
         console.log('were back', users)
           callback(users);
