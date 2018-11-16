@@ -30,6 +30,22 @@ module.exports = knex => {
     }
   });
 
+  // @route   GET api/users/register
+  // @desc    renders register page
+  // @access  Public
+
+  router.get('/register', (req, res) => {
+    res.render('register');
+  });
+
+  // @route   GET api/users/login
+  // @desc    renders login page
+  // @access  Public
+
+  router.get('/login', (req, res) => {
+    res.status(200).render('login');
+  });
+
   // @route   GET api/users/:id/rate
   // @desc    gets all rated by  current user
   // @access  Private
@@ -122,22 +138,6 @@ module.exports = knex => {
       });
   });
 
-  // @route   GET api/users/register
-  // @desc    renders register page
-  // @access  Public
-
-  router.get('/register', (req, res) => {
-    res.render('register');
-  });
-
-  // @route   GET api/users/login
-  // @desc    renders login page
-  // @access  Public
-
-  router.get('/login', (req, res) => {
-    res.status(200).render('login');
-  });
-
   // @route   GET api/users/:id/resourses
   // @desc    return all resourses of a user
   // @access  Private
@@ -198,6 +198,32 @@ module.exports = knex => {
         req.session.user_id = user[0].username;
         res.status(201).redirect(`/api/users/${user[0].id}`);
       })
+      .catch(err => {
+        console.error('FROM catch:', err.message);
+        res.status(400).send('Message: 400: Bad request: username or password');
+      });
+  });
+
+  // @route   POST api/users/register
+  // @desc  registers new users
+  // @access  Public
+  router.post('/:id/resourse', (req, res) => {
+    const { url, title, description, intrest_id } = req.body;
+    knex('resourses')
+      .insert({
+        url,
+        title,
+        description,
+        insert_id
+      })
+      .then(resourse => {
+        console.log(resourse);
+        knex('user_resourses').insert({});
+      })
+      // .then(resourse => {
+      //   req.session.user_id = user[0].username;
+      //   res.status(201).redirect(`/api/users/${user[0].id}`);
+      // })
       .catch(err => {
         console.error('FROM catch:', err.message);
         res.status(400).send('Message: 400: Bad request: username or password');
