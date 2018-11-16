@@ -10,10 +10,10 @@
         </form>
         <% } 
         else { %>    
-        <form method="GET" action="/login">
+        <form method="GET" action="/api/users/login">
             <input type="submit" value="Login">
           </form>
-          <form method="GET" action="register">
+          <form method="GET" action="/api/users/register">
             <input type="submit" value="Register">
           </form>
           <% } %>
