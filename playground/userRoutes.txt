@@ -12,8 +12,8 @@
 /:id/profile = render profile if session- cookie
 /:id  all owned / liked resourses  ------- done
 /:id/like   all liked ones  ------ done
-/:id/comment all commented ones 
-/:id/rate   all liked ones 
+/:id/comment all commented ones ----- done
+/:id/rate   all liked ones ------ done
 
 %%% POST %%%%
 /login -  login USERS  ----- done
