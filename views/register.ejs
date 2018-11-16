@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-        <style>
-                body { background-color: #D5F5E3}
-                </style>
-    </head>
-    <p style= "font-family:'Raleway', sans-serif;font-size:25px"> Register
-            <% include partials/_header %>
-            <body style="font-family:'Raleway', sans-serif">
-                <form method="POST" action="/register">
-                <label for="user">Registration:</label><br>
-                <input id="email" type="email" name="email" 
-                    placeholder="Email" style="font-family:'Raleway', sans-serif; width:300px"> <br/>
-                    <input id="password" type="password" name="password"
-                    placeholder="Password" style="font-family:'Raleway', sans-serif; width:243px">
-                    <input type="submit" value="Submit">
-                </form>
-            </body>
-        </html>
+<!doctype html>
+<html lang ="en">
+<head>
+</head>
+<body>
+        <form method="POST" action="api/users/register">
+            <label for="user">Register an Account:</label><br>
+                <input id="email" type="email" name="email" placeholder="Email"> <br>
+                <input id="username" type="username" name="username" placeholder="username"> <br>
+                <input id="password" type="password" name="password"placeholder="Password">
+            <input type="submit" value="Submit">
+        </form>
+</body>
+</html>

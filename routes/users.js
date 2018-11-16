@@ -101,7 +101,7 @@ module.exports = knex => {
   // @access  Public
 
   router.get('/register', (req, res) => {
-    res.status(200).render('register');
+    res.render('register');
   });
 
   // @route   GET api/users/login
