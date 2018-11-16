@@ -5,8 +5,8 @@
 <body>
         <% if (user_id) { %>
         <form action="/api/users/logout" method="POST">
-            <label for="user"> <%= user_id %> </label>
-            <input type="submit" value="Logout">
+            <p> <a href ="/api/users/:id">Welcome "<%= user_id %>!" </a> </p>
+            <input type="submit" value="Logout"> 
         </form>
         <% } 
         else { %>    
