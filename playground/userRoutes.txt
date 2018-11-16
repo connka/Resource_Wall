@@ -21,10 +21,10 @@
 /logout - logout a user and redirect   ------- done
 
 
-/:id/resourses/  to add 
-/:id/resouses/:id/like  to add 
-/:id/resouses/:id/comment to add 
-/:id/resouses/:id/rate to add 
+/:id/resourses/  to add  ---- done
+/:id/resourses/:id/like  to add  ----- done
+/:id/resouses/:id/comment to add  ---- done
+/:id/resouses/:id/rate to add ----- done
 
 %%% PUT %%%%
 /:id/profile    update profile

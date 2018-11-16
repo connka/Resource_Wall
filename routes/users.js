@@ -204,29 +204,111 @@ module.exports = knex => {
       });
   });
 
-  // @route   POST api/users/register
+  // @route   POST api/users/:id/resourse
   // @desc  registers new users
-  // @access  Public
+  // @access  Private
   router.post('/:id/resourse', (req, res) => {
+    const { id } = req.params;
     const { url, title, description, intrest_id } = req.body;
-    knex('resourses')
+    let newResourse;
+    return knex
+      .transaction(function(t) {
+        return knex('resourses')
+          .transacting(t)
+          .insert({
+            url,
+            title,
+            description,
+            intrest_id
+          })
+          .returning('*')
+          .then(function(response) {
+            console.log('RESPONSE:', response);
+            newResourse = response[0];
+            return knex('user_resourses')
+              .transacting(t)
+              .insert({
+                user_id: id,
+                resourse_id: response[0].id
+              });
+          })
+          .then(t.commit)
+          .catch(t.rollback);
+      })
+      .then(function(resp) {
+        console.log('Transaction complete.');
+        res.status(201).send(newResourse);
+      })
+      .catch(function(err) {
+        console.error(err);
+        res.status(400).send('Message : 400 : Bad request');
+      });
+  });
+
+  // @route   POST api/users/:user_id/resourses/:resourse_id/like
+  // @desc  logged in user addes a like to a resourse
+  // @access  Private
+  router.post('/:user_id/resourses/:resourse_id/like', (req, res) => {
+    const { user_id, resourse_id } = req.params;
+    console.log('req.params:', req.params);
+    knex('user_likes')
       .insert({
-        url,
-        title,
-        description,
-        insert_id
+        user_id: user_id,
+        resourse_id: resourse_id
       })
-      .then(resourse => {
-        console.log(resourse);
-        knex('user_resourses').insert({});
+      .then(result => {
+        console.log('result :', result);
+        res.status(201).send(`LIke added to resourse ${resourse_id}`);
       })
-      // .then(resourse => {
-      //   req.session.user_id = user[0].username;
-      //   res.status(201).redirect(`/api/users/${user[0].id}`);
-      // })
       .catch(err => {
-        console.error('FROM catch:', err.message);
-        res.status(400).send('Message: 400: Bad request: username or password');
+        console.log(err);
+        res.status(400).send('Status : 400 : Bad request');
+      });
+  });
+
+  // @route   POST api/users/:user_id/resourses/:resourse_id/comment
+  // @desc  logged in user addes a comment to a resourse
+  // @access  Private
+  router.post('/:user_id/resourses/:resourse_id/comment', (req, res) => {
+    const { user_id, resourse_id } = req.params;
+    const { text } = req.body;
+    console.log('req.params:', req.params);
+    knex('user_comments')
+      .insert({
+        text: text,
+        user_id: user_id,
+        resourse_id: resourse_id
+      })
+      .then(result => {
+        console.log('result :', result);
+        res.status(201).send(`Comment added to resourse ${resourse_id}`);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send('Status : 400 : Bad request');
+      });
+  });
+
+  // @route   POST api/users/:user_id/resourses/:resourse_id/rate
+  // @desc  logged in user addes a rate to a resourse
+  // @access  Private
+  router.post('/:user_id/resourses/:resourse_id/rate', (req, res) => {
+    const { user_id, resourse_id } = req.params;
+    const { rating } = req.body;
+    console.log('req.params:', req.params);
+    knex('user_resourse_rating')
+      .insert({
+        rating: rating,
+        user_id: user_id,
+        resourse_id: resourse_id
+      })
+      .then(result => {
+        console.log('result :', result);
+        res.status(201).send(`Rating added to resourse ${resourse_id}`);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send('Status : 400 : Bad request');
       });
   });
 
