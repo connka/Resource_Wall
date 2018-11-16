@@ -9,7 +9,7 @@
 
 /register  - renders the regiser page    ----- done
 /login  - render login page      ------- done
-/:id/profile = render profile if session- cookie
+/:id/profile = render profile if session- cookie   ---- done
 /:id  all owned / liked resourses  ------- done
 /:id/like   all liked ones  ------ done
 /:id/comment all commented ones ----- done
@@ -20,23 +20,23 @@
 /register - register a new USERS   ----- done 
 /logout - logout a user and redirect   ------- done
 
-
+/:id/profile    update profile --- done
 /:id/resourses/  to add  ---- done
 /:id/resourses/:id/like  to add  ----- done
 /:id/resouses/:id/comment to add  ---- done
 /:id/resouses/:id/rate to add ----- done
 
 %%% PUT %%%%
-/:id/profile    update profile
-/:id/resourses/:id  update resourse
-/:id/resouses/:id/like   update like    ----- optional 
-/:id/resouses/:id/comment update comment
-/:id/resouses/:id/rate update rating
+/:id/profile    update profile --- done
+/:user_id/resouses/:resourse_id  update resourse  --- done
+/:user_id/resouses/:resourse_id/like   update like    ----- optional 
+/:user_id/resouses/:resourse_id/comment/:comment_id update comment   ---- done
+/:user_id/resouses/:resourse_id/rate update rating --- done
 
     
 %%% DELETE %%%%
 /:id/profile    delete profile  ------ optional
-/:id/resourses/:id          delete resourse
+/:user_id/resourses/:resourse_id  delete a resourse 
 /:id/resouses/:id/like      delete like
 /:id/resouses/:id/comment    delete comment
 /:id/resouses/:id/rating     rating delete
