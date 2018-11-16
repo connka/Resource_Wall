@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang ="en">
+<head>
+</head>
+  <div id=public>
+        <% if (user_id) { %>
+        <form action="/api/users/logout" method="POST">
+            <p> <a href ="/api/users/:id">Welcome "<%= user_id %>!" </a> </p>
+            <input type="submit" value="Logout"> 
+        </form>
+        <% } 
+        else { %>    
+        <form method="GET" action="/api/users/login">
+            <input type="submit" value="Login">
+          </form>
+          <form method="GET" action="/api/users/register">
+            <input type="submit" value="Register">
+          </form>
+          <% } %>
+  </div>
+</html>
