@@ -30,6 +30,22 @@ module.exports = knex => {
     }
   });
 
+  // @route   GET api/users/register
+  // @desc    renders register page
+  // @access  Public
+
+  router.get('/register', (req, res) => {
+    res.render('register');
+  });
+
+  // @route   GET api/users/login
+  // @desc    renders login page
+  // @access  Public
+
+  router.get('/login', (req, res) => {
+    res.status(200).render('login');
+  });
+
   // @route   GET api/users/:id/rate
   // @desc    gets all rated by  current user
   // @access  Private
@@ -120,22 +136,6 @@ module.exports = knex => {
         // res.status(404).send('Mesaage : 404 :No resourses found');
         res.status(302).redirect('/');
       });
-  });
-
-  // @route   GET api/users/register
-  // @desc    renders register page
-  // @access  Public
-
-  router.get('/register', (req, res) => {
-    res.status(200).render('register');
-  });
-
-  // @route   GET api/users/login
-  // @desc    renders login page
-  // @access  Public
-
-  router.get('/login', (req, res) => {
-    res.status(200).render('login');
   });
 
   // @route   GET api/users/:id/resourses
