@@ -2,7 +2,7 @@
 <html lang ="en">
 <head>
 </head>
-<body>
+  <div id=public>
         <% if (user_id) { %>
         <form action="/api/users/logout" method="POST">
             <p> <a href ="/api/users/:id">Welcome "<%= user_id %>!" </a> </p>
@@ -17,5 +17,5 @@
             <input type="submit" value="Register">
           </form>
           <% } %>
-</body>
+  </div>
 </html>
