@@ -1,0 +1,49 @@
+header {
+    background-color: rgba(255, 255, 255, 0.808);
+    font-family: "Helvetica";
+    border: solid 1px;
+    border-radius: 5px;
+    margin: 1em 2em;
+    padding: 10px;
+    width: 80%;
+}
+
+.registration_box textarea {
+    width: 100%;
+    padding: 5px;
+}
+.alert {
+    clear: none;
+}
+
+a {
+    color: black;
+    text-decoration: none
+}
+    a:link {
+    color: black
+}
+    a:visited {
+    color: black
+}
+
+header .navbar-title {
+    font-size: 30px;
+}
+
+header .userID {
+    text-align: right;
+    font-size: 18px;
+}
+
+header .my_toggle {
+    float: right;
+    font-size: 30;
+}
+
+#logoutbtn {
+    float: right;
+    height: 20px;
+    border-radius: 5px;
+    background-color: white;
+}
