@@ -57,20 +57,58 @@
     <br />
 
 
-    <div id="my_resourse_archive">
-        <h2>My Resources</h2>
-            <% for (let resource in allResources){%>
-              <% let avgRating = resource.totalRating/resource.countRating %>
-            <h2 id="resourse_name" class="resourse_name">
-              <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
-            </h2>
-            <div id="username">Submitted by: <%= allResources[resource].user_id%></div>
-            <div id="intrest">Category: <%= allResources[resource].intrest_id %></div>
-            <div id="description">Description: <%= allResources[resource].description %></div>
-            <div id="like">Likes: <%= allResources[resource].totalLikes %></div>
-            <div id="avgRating"> Rating: <% resource.totalRating/resource.countRating %>
-            </div>
-          </div>
+    <div id="resourse_archive">
+      <% for (let resource in allResources){%>
+        <% let avgRating = resource.totalRating/resource.countRating %>
+          <h2 id="resourse_name" class="resourse_name">
+            <a href=<%= allResources[resource].url %>>
+              <%= allResources[resource].title %>
+            </a>
+    </div>
+    <div id="username">
+      <%= allResources[resource].user_id%>
+    </div>
+    <div id="type">DATA TYPE</div>
+    <div id="intrest">
+      <%= allResources[resource].intrest_id %>
+    </div>
+    <div id="description">
+      <%= allResources[resource].description %>
+    </div>
+    <div id="like">Likes :
+      <%= allResources[resource].totalLikes %>
+    </div>
+    <div id="avgRating"> Rating :
+      <%= allResources[resource].avgRating() || 0 %>
+    </div>
+    </div>
+    
+    <div id="comment_dropdown">
+      <div id="new_comment">
+        Comment:
+        <div class="new_comment">
+          <label for="new_comment"></label>
+          <textarea class="form-control z-depth-1" id="new_comment" rows="2" placeholder="Comment on this resource..."></textarea>
+        </div>
+      </div>
+      <div id="previous_comments"></div>
+      <%for(let comment of allResources[resource].comments){%>
+        ---------------------------------------------
+        <p>User @
+          <%= comment.username%>
+        </p>
+        <p>
+          <%= comment.text%>
+        </p>
+        <p>
+          Posted on :
+          <%= comment.updated_at%>
+        </p>
+        ----------------------------------------------
+        <%}%>
+    </div>
+    <hr>
+    <%}%>
 
           </body>
           </html>

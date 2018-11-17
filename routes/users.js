@@ -51,22 +51,22 @@ module.exports = knex => {
   // @desc    gets current user
   // @access  Private
 
-  router.get('/:id', (req, res) => {
-    const { id } = req.params;
-    console.log('GET /:id:', id);
-    knex
-      .select('*')
-      .from('users')
-      .where('id', id)
-      .then(user => {
-        res.status(200).send({ id: user.id, username: user.username });
-      })
-      .catch(err => {
-        console.log(err);
-        // res.status(404).send('Mesaage : 404 :No user found');
-        res.status(302).redirect('/');
-      });
-  });
+  // router.get('/:id', (req, res) => {
+  //   const { id } = req.params;
+  //   console.log('GET /:id:', id);
+  //   knex
+  //     .select('*')
+  //     .from('users')
+  //     .where('id', id)
+  //     .then(user => {
+  //       res.status(200).send({ id: user.id, username: user.username });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       // res.status(404).send('Mesaage : 404 :No user found');
+  //       res.status(302).redirect('/');
+  //     });
+  // });
 
   // @route   GET api/users/:id
   // @desc    gets current user
@@ -94,7 +94,7 @@ module.exports = knex => {
   //     });
   // });
 
-  router.get('/:id/resourses', (req, res) => {
+  router.get('/:id', (req, res) => {
     let allResources = {};
     let user_id = req.session.user_id;
     console.log('current user :', user_id);
@@ -130,27 +130,7 @@ module.exports = knex => {
             comments: []
           };
         });
-        //console.log(allResources);
-        //return allResources;
       })
-      // knex('resourses')
-      //   .select('intrests.name', 'resourses.id')
-      //   .join('intrests', 'intrests.id', 'resourses.intrest_id')
-      //   .then(allIntrests => {
-      //     console.log('ALL INTREST:,', allIntrests);
-      //     // allIntrests.map(intrest => {
-      //     //   allResources[intrestresource.id] = {
-      //     //     user_id,
-      //     //     ...resource,
-      //     //     totalLikes: 0,
-      //     //     countRatings: 0,
-      //     //     totalRating: 0,
-      //     //     comments: []
-      //     //   };
-      //     //});
-      //     //console.log(allResources);
-      //     //return allResources;
-      //   })
       .then(() => {
         return knex('user_comments')
           .select(
@@ -166,7 +146,6 @@ module.exports = knex => {
         let allCommnets = [];
         comments.map(comment => {
           let singleComment = { ...comment };
-          //console.log('Single comment:', singleComment);
           allResources[comment.resourse_id].comments.push(singleComment);
         });
       })
@@ -188,20 +167,11 @@ module.exports = knex => {
           delete allResources[rating.resourse_id].password;
         });
       })
-      // .then(() => {
-      //   //console.log('ALL resources:', allResources);
-      //   //allResources.map(singleResource => delete singleResource.password);
-      //   for (let singleResource of allResources) {
-      //     delete singleResource.password;
-      //   }
-      //   return allResources;
-      // })
       .then(() => {
-        //console.log(allResources);
         let templateVars = { user_id, allResources };
-        //console.log('TEMPLATE VARS:', templateVars);
+        console.log('TEMPLATE VARS:', templateVars);
         //res.status(200).render('index', templateVars);
-        res.status(200).send(templateVars);
+        res.status(200).render('myresourses', templateVars);
       })
       .catch(err => {
         console.error(err.message);
