@@ -112,7 +112,7 @@
       <div id="like">Likes :<%= allResources[resource].totalLikes %></div>
 
       <div id="avgRating"> Rating :
-        <% resource.totalRating/resource.countRating %>
+        <%= allResources[resource].avgRating() || 0 %>
       </div>
     </div>
 

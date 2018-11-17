@@ -79,6 +79,9 @@ app.get('/', (req, res) => {
           totalLikes: 0,
           countRatings: 0,
           totalRating: 0,
+          avgRating: function() {
+            return this.totalRating / this.countRatings;
+          },
           comments: []
         };
       });
@@ -137,6 +140,9 @@ app.get('/', (req, res) => {
       allRatings.map(rating => {
         allResources[rating.resourse_id].countRatings += 1;
         allResources[rating.resourse_id].totalRating += rating.rating;
+        // allResources[rating.resourse_id].avgRating =
+        //   allResources[rating.resourse_id].totalRating /
+        //   allResources[rating.resourse_id].countRatings;
       });
     })
     .then(() => {
@@ -146,7 +152,7 @@ app.get('/', (req, res) => {
     .then(() => {
       //console.log(allResources);
       let templateVars = { user_id, allResources };
-      //console.log('TEMPLATE VARS:', templateVars);
+      console.log('TEMPLATE VARS:', templateVars);
       res.status(200).render('index', templateVars);
     })
     .catch(err => {

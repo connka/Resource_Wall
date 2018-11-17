@@ -19,6 +19,9 @@ module.exports = knex => {
             totalLikes: 0,
             countRatings: 0,
             totalRating: 0,
+            avgRating: function() {
+              return this.totalRating / this.countRatings;
+            },
             comments: []
           };
         });
