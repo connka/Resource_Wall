@@ -1,11 +1,5 @@
-body {
-  background-color: lightgray; }
-
 #filter_bar {
   background-color: aqua; }
-
-.searchbar {
-  background-color: green; }
 
 .filter_dropdown {
   font-family: 'Courier New', Courier, monospace; }

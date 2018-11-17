@@ -1,106 +1,28 @@
-@import url(https://fonts.googleapis.com/css?family=Pacifico);
-$size:150px;
-$bg:#CDE;
-
-body{
-  padding:0 100px 100px;
-  background-color: $bg !important;
+body {
+  background-color: lightgray;
 }
 
-
-
-
-article{
-  position:relative;
-  padding-left:$size + 30;
-  padding-right: $size/2;
-  height: $size;
-  margin-bottom: 30px;
-  background-color: #FFF;
-  cursor:pointer;
-  
-  .img-wrapper{
-    position: absolute;
-    top:- 10px;
-    left:-10px;
-  
-    background-color: $bg;
-    padding:10px;
-    z-index: 1000;
-    
-    
-    img{
-      width: $size;
-    }
-  }
-  
-  h1{
-    height: $size/2;
-    line-height: $size/2;
-    font-size: 24px;
-    border-bottom: 2px solid $bg;
-    color: #428bca;
-  }
-  p{
-    color: #888;
-  }
-  a{
-    position:absolute;
-    display:block;
-    top: 0;
-    left: 0;
-    height: 100%;
-    line-height: $size;
-    text-align: center;
-    width: 100%;
-    background-color: #FFF;
-    font-size: 48px;
-    font-style:italic;
-    opacity:0;
-    color: #428bca !important;
-    text-decoration: none !important;
-    font-family: "Pacifico";
-  }
-   &:hover{
-    .img-wrapper{
-      padding:5px;
-      img{
-        width: $size + 10;
-      }
-    }
-    a{
-      opacity:1;
-    }
-  }
+#filter_bar{
+  background-color: aqua;
 }
 
-.bloc{
-  article{
-    padding:10px;
-    height: $size*1.5;
-    margin-top: $size/2;
-    
-    .img-wrapper{
-      position: relative;
-      top:-($size+20)/2;
-      width: $size+20;
-      left:inherit;
-      margin: auto;
-      margin-bottom: -$size + 50;
-    }
-    
-    h1{
-      font-size: 14px;
-      height: $size/4;
-      line-height: $size/4;
-    }
-    
-    p{
-      font-size: 12px;
-    }
-    
-    a{
-       line-height: $size*1.5 +30;
-    }
-  }
+.searchbar {
+  background-color: green
+
+}
+
+.filter_dropdown {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#new_resourse{
+  background-color: yellow;
+}
+
+#resourse_archive{
+  background-color: blueviolet;
+}
+
+#comment_dropdown {
+  background-color: pink;
 }
