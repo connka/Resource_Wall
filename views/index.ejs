@@ -48,10 +48,11 @@
       <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
       <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
+      <% if (user_id) { %>
       <button class="comment_toggle">Comment</button>
+      <% } %>
     </div>
-
-    <div class="comment_dropdown">
+    <div hidden class="comment_dropdown">
         <form method="POST" action="" class="comment_box">
         Comment on this resource:
           <label for="new_comment"></label>

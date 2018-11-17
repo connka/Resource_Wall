@@ -64,7 +64,6 @@ $("document").ready(() => {
 
   //Comment Button Toggle:
 $(".comment_toggle").on("click", () => {
-  console.log("HII")
   $(".comment_dropdown").slideToggle();
   });
 });
