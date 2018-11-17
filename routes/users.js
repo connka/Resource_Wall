@@ -522,19 +522,14 @@ module.exports = knex => {
       .transaction(function(t) {
         return knex('user_resourses')
           .transacting(t)
-          .where({
-            user_id: user_id,
-            resourse_id: resourse_id
-          })
+          .where({ user_id: user_id, resourse_id: resourse_id })
           .delete()
           .returning('*')
           .then(function(response) {
             console.log('RESPONSE:', response);
             return knex('resourses')
               .transacting(t)
-              .where({
-                id: resourse_id
-              })
+              .where({ id: resourse_id })
               .delete()
               .returning('*');
           })
