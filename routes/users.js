@@ -44,7 +44,7 @@ module.exports = knex => {
   // @access  Public
 
   router.get('/login', (req, res) => {
-    res.status(200).render('login');
+    res.status(200).render('login.ejs');
   });
 
   // @route   GET api/users/:id
