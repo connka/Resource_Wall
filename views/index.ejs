@@ -9,6 +9,9 @@
         <h1>Resources</h1>
         <div id="filter_bar">
         <div class="col-md-10">
+                <div class="newResourceButton">
+                    <button id="newResource" class="btn btn-default my_toggle" type="button">New Resource</button>
+                </div>
                         <div class="input-group">
                         <input id="search-bar" type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
@@ -32,7 +35,7 @@
         <br><br><br>
 
         
-        <div id="new_resourse">
+        <div id="new_resourse" hidden class="newResource">
                 <div id = "new_resourse_name" class="resourse_name">Resource Name 
                         <div class="resourse_name">
                         <label for="resourse_name"></label>
@@ -83,7 +86,7 @@
 
         <br><br><br>
         
-        <div id="dropdown">
+        <div id="dropdown" hidden class="resourceComment">
                 <div id = "new_comment">Comment:
                                 <div class="new_comment">
                                 <label for="new_comment"></label>
@@ -93,7 +96,5 @@
                         <div id = "previous_comments">These are the older comments
                                 </div>
         </div>
-
                 </body>
-
 </html>
