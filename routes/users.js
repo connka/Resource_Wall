@@ -97,17 +97,19 @@ module.exports = knex => {
   router.get('/:id/profile', (req, res) => {
     const { id } = req.params;
     console.log(req.session.user_id);
+    const user_id = req.session.user_id;
     if (id == req.session.user_id) {
       knex
         .select('*')
         .from('profiles')
         .where('user_id', id)
         .then(profile => {
-          res.status(200).send(profile);
+          console.log(profile);
+          res.render('userpage', profile[0]);
         })
         .catch(err => {
           console.log(err);
-          // res.status(404).send('Mesaage : 404 :No resourses found');
+          res.status(404).send('Mesaage : 404 :No resourses found');
           res.status(404).redirect(`/api/users/${id}`);
         });
     } else {
