@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
         <head>
+
         </head>
 <header>
         <% include partials/_header %> 
+        <script src="/scripts/app.js"></script>
 </header>
 <body>
         <h1>Resources</h1>
@@ -43,6 +45,7 @@
       <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
       <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
+      <button id="comment_toggle">Comment</button>
     </div>
 
     <div class="comment_dropdown">
