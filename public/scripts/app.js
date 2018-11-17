@@ -63,7 +63,7 @@ $("document").ready(() => {
   loadUsers(renderUsers);
 
   //Comment Button Toggle:
-$("#comment_toggle").on("click", () => {
+$(".comment_toggle").on("click", () => {
   console.log("HII")
   $(".comment_dropdown").slideToggle();
   });
