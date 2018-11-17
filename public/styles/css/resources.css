@@ -1,0 +1,14 @@
+#filter_bar {
+  background-color: aqua; }
+
+.filter_dropdown {
+  font-family: 'Courier New', Courier, monospace; }
+
+#new_resourse {
+  background-color: yellow; }
+
+#resourse_archive {
+  background-color: blueviolet; }
+
+#comment_dropdown {
+  background-color: pink; }

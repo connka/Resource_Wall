@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <header><% include partials/_header %> <title>"Resources"</title></header>
-
-  <body>
-    <h1>Resources</h1>
-    <div id="filter_bar">
-      <div class="col-md-10">
-        <div class="input-group">
-          <input
-            id="search-bar"
-            type="text"
-            class="form-control"
-            placeholder="Search for..."
-          />
-          <span class="input-group-btn">
-            <button class="btn btn-default my_toggle" type="button">
-              Search
-            </button>
-          </span>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle my_toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-          >
-            Filter by...
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">HTML</a><br />
-            <a class="dropdown-item" href="#">Hockey</a><br />
-            <a class="dropdown-item" href="#">Birds</a><br />
-          </div>
+        <head>
+        </head>
+<header>
+        <% include partials/_header %> 
+</header>
+<body>
+        <h1>Resources</h1>
+        <div id="filter_bar">
+        <div class="col-md-10">
+                <div class="newResourceButton">
+                    <button id="newResource" class="btn btn-default my_toggle" type="button">New Resource</button>
+                </div>
+                        <div class="input-group">
+                        <input id="search-bar" type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                                <button class="btn btn-default my_toggle" type="button">Search</button>
+                        </span>
+                        </div>
+                </div>
+                <div class="col-md-2">
+                <div class="filter_dropdown">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Filter by... <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                                <li><a href="#">HTML</a></li>
+                                <li><a href="#">Hockey</a></li>
+                                <li><a href="#">Birds</a></li>
+                        </ul>
+                </div>
+                </div>
         </div>
       </div>
     </div>
@@ -64,12 +60,6 @@
             placeholder="URL"
           ></textarea>
         </div>
-      </div>
-      <div class="new_resourse_type">
-        Resource Type: <a class="text" href="#">Text</a><br />
-        <a class="video" href="#">Video</a><br />
-        <a class="audio" href="#">Audio</a><br />
-        <label for="resourse_type"></label>
       </div>
       <div class="new__resourse_intrest">
         Category: <a class="hockey" href="#">Hockey</a><br />
@@ -101,24 +91,17 @@
       <div id="resourse_name" class="resourse_name">
         <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
       </div>
-
       <div id="username"><%= allResources[resource].user_id%></div>
-
       <div id="type">DATA TYPE</div>
-
       <div id="intrest"><%= allResources[resource].intrest_id %></div>
-
       <div id="description"><%= allResources[resource].description %></div>
       <div id="like">Likes :<%= allResources[resource].totalLikes %></div>
-
       <div id="avgRating"> Rating :
         <%= allResources[resource].avgRating() || 0 %>
       </div>
     </div>
-
  
-
-    <div id="dropdown">
+    <div id="comment_dropdown">
       <div id="new_comment">
         Comment:
         <div class="new_comment">
@@ -131,12 +114,9 @@
           ></textarea>
         </div>
       </div>
-
-      <div id="previous_comments">These are the older comments</div>
+      <div id="previous_comments"></div>
       <%for(let comment of allResources[resource].comments){%>
-
         ---------------------------------------------
-
         <p>User @ <%= comment.username%></p>
         <p><%= comment.text%></p>
         <p>
