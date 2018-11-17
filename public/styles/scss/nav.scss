@@ -31,7 +31,7 @@ header .navbar-title {
     font-size: 30px;
 }
 
-header .userID {
+#nav_userID {
     text-align: right;
     font-size: 18px;
 }
@@ -43,7 +43,6 @@ header .my_toggle {
 
 #logoutbtn {
     float: right;
-    height: 20px;
     border-radius: 5px;
     background-color: white;
 }

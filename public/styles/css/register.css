@@ -3,7 +3,7 @@ body {
   font-family: Arial, Helvetica, sans-serif; }
 
 .registration_box {
-  background-color: #eee;
+  background-color: lightgray;
   border: solid 1px;
   border-radius: 5px;
   margin: 1em 2em;
