@@ -37,8 +37,9 @@
     <br /><br /><br />
 
     <div id="new_resourse">
+        <h2>Add a New Resource to the Library</h2>
       <div id="new_resourse_name" class="resourse_name">
-        Resource Name
+        Resource Name:
         <div class="resourse_name">
           <label for="resourse_name"></label>
           <textarea
@@ -87,8 +88,7 @@
     <div id="resourse_archive">
       <% for (let resource in allResources){%>
         <% let avgRating = resource.totalRating/resource.countRating %>
-        <hr>
-      <div id="resourse_name" class="resourse_name">
+      <h2 id="resourse_name" class="resourse_name">
         <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
       </div>
       <div id="username"><%= allResources[resource].user_id%></div>
