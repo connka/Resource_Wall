@@ -1,99 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<header>
-        <% include partials/_header %> 
-        <title>"Resources"</title>
-</header>
+  <header><% include partials/_header %> <title>"Resources"</title></header>
 
-<body>
-        <h1>Resources</h1>
-        <div id="filter_bar">
-        <div class="col-md-10">
-                        <div class="input-group">
-                        <input id="search-bar" type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                                <button class="btn btn-default my_toggle" type="button">Search</button>
-                        </span>
-                        </div>
-                </div>
-                <div class="col-md-2">
-                <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle my_toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                        Filter by...
-                        </button>
-                        <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">HTML</a><br>
-                                <a class="dropdown-item" href="#">Hockey</a><br>
-                                <a class="dropdown-item" href="#">Birds</a><br>
-                        </div>
-                </div>
-                </div>
+  <body>
+    <h1>Resources</h1>
+    <div id="filter_bar">
+      <div class="col-md-10">
+        <div class="input-group">
+          <input
+            id="search-bar"
+            type="text"
+            class="form-control"
+            placeholder="Search for..."
+          />
+          <span class="input-group-btn">
+            <button class="btn btn-default my_toggle" type="button">
+              Search
+            </button>
+          </span>
         </div>
-        <br><br><br>
-
-        
-        <div id="new_resourse">
-                <div id = "new_resourse_name" class="resourse_name">Resource Name 
-                        <div class="resourse_name">
-                        <label for="resourse_name"></label>
-                        <textarea class="form-control z-depth-1" id="resourse_name" rows="1" placeholder="NAME"></textarea>
-                        </div> </div>
-                <div id = "new_resourse_url">Resource URL: 
-                        <div class="resourse_url">
-                        <label for="resourse_url"></label>
-                        <textarea class="form-control z-depth-1" id="resourse_url" rows="1" placeholder="URL"></textarea>
-                        </div> </div>
-                <div class = "new_resourse_type">Resource Type: 
-                        <a class="text" href="#">Text</a><br>
-                        <a class="video" href="#">Video</a><br>
-                        <a class="audio" href="#">Audio</a><br>
-                        <label for="resourse_type"></label>                                
-                        </div>
-                <div class = "new__resourse_intrest">Category: 
-                        <a class="hockey" href="#">Hockey</a><br>
-                        <a class="html" href="#">HTML</a><br>
-                        <a class="birds" href="#">Birds</a><br>
-                        <label for="resourse_type"></label>                                
-                                </div> 
-                <div id = "new_resourse_description">Description: 
-                        <div class="resourse_description">
-                        <label for="resourse_description"></label>
-                        <textarea class="form-control z-depth-1" id="Interest1" rows="2" placeholder="A bit about your resource..."></textarea>
-                                </div> </div>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle my_toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+          >
+            Filter by...
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">HTML</a><br />
+            <a class="dropdown-item" href="#">Hockey</a><br />
+            <a class="dropdown-item" href="#">Birds</a><br />
+          </div>
         </div>
-        <br> <br> <br>
+      </div>
+    </div>
+    <br /><br /><br />
 
-        <div id="resourse_archive">
-                        <div id = "resourse_name" class="resourse_name">
-                        <a href="www.example.com">NAME OF RESOURCE</a>
-                                </div>
-
-                        <div id = "username">USER1 
-                                </div>
-
-                        <div id = "type">DATA TYPE
-                                </div>
-
-                        <div id = "intrest">CATEGORY
-                                </div>
-
-                        <div id = "description">THIS IS INFO ABOUT THE LINK
-                                </div>
-                </div>
-
-        <br><br><br>
-        
-        <div id="dropdown">
-                <div id = "new_comment">Comment:
-                                <div class="new_comment">
-                                <label for="new_comment"></label>
-                                <textarea class="form-control z-depth-1" id="new_comment" rows="2" placeholder="Comment on this resource..."></textarea>
-                                        </div> </div>
-
-                        <div id = "previous_comments">These are the older comments
-                                </div>
+    <div id="new_resourse">
+      <div id="new_resourse_name" class="resourse_name">
+        Resource Name
+        <div class="resourse_name">
+          <label for="resourse_name"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="resourse_name"
+            rows="1"
+            placeholder="NAME"
+          ></textarea>
         </div>
+      </div>
+      <div id="new_resourse_url">
+        Resource URL:
+        <div class="resourse_url">
+          <label for="resourse_url"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="resourse_url"
+            rows="1"
+            placeholder="URL"
+          ></textarea>
+        </div>
+      </div>
+      <div class="new_resourse_type">
+        Resource Type: <a class="text" href="#">Text</a><br />
+        <a class="video" href="#">Video</a><br />
+        <a class="audio" href="#">Audio</a><br />
+        <label for="resourse_type"></label>
+      </div>
+      <div class="new__resourse_intrest">
+        Category: <a class="hockey" href="#">Hockey</a><br />
+        <a class="html" href="#">HTML</a><br />
+        <a class="birds" href="#">Birds</a><br />
+        <label for="resourse_type"></label>
+      </div>
+      <div id="new_resourse_description">
+        Description:
+        <div class="resourse_description">
+          <label for="resourse_description"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="Interest1"
+            rows="2"
+            placeholder="A bit about your resource..."
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
 
-                </body>
+    <div id="resourse_archive">
+      <% for (let resource in allResources){%>
+        <% let avgRating = resource.totalRating/resource.countRating %>
+        <hr>
+      <div id="resourse_name" class="resourse_name">
+        <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
+      </div>
 
+      <div id="username"><%= allResources[resource].user_id%></div>
+
+      <div id="type">DATA TYPE</div>
+
+      <div id="intrest"><%= allResources[resource].intrest_id %></div>
+
+      <div id="description"><%= allResources[resource].description %></div>
+      <div id="like">Likes :<%= allResources[resource].totalLikes %></div>
+
+      <div id="avgRating"> Rating :
+        <% resource.totalRating/resource.countRating %>
+      </div>
+    </div>
+
+ 
+
+    <div id="dropdown">
+      <div id="new_comment">
+        Comment:
+        <div class="new_comment">
+          <label for="new_comment"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="new_comment"
+            rows="2"
+            placeholder="Comment on this resource..."
+          ></textarea>
+        </div>
+      </div>
+
+      <div id="previous_comments">These are the older comments</div>
+      <%for(let comment of allResources[resource].comments){%>
+
+        ---------------------------------------------
+
+        <p>User @ <%= comment.username%></p>
+        <p><%= comment.text%></p>
+        <p>
+              Posted on :  <%= comment.updated_at%>
+        </p>
+       ----------------------------------------------
+      <%}%>
+    </div>
+<hr>
+    <%}%>
+  </body>
 </html>

@@ -8,26 +8,66 @@ module.exports = knex => {
   // @desc  returns all resourses
   // @access  Public
 
-  // router.get('/', (req, res) => {
-  //   knex('resourses')
-  //     .select(['url', 'title', 'description', 'intrest_id'])
-  //     .then(results => {
-  //       res.status(200).send(results);
-  //     })
-  //     .catch(err => {
-  //       console.error(err.message);
-  //       res.status(500).send('Mesaage : 500 : Internal server error');
-  //     });
-  // });
-
   router.get('/', (req, res) => {
+    let allResources = {};
     knex('resourses')
       .select('*')
-      .leftJoin('user_comments', 'resourses.id', 'user_comments.resourse_id')
-      .leftJoin('user_likes', 'resourses.id', 'user_likes.resourse_id')
-      .leftJoin('user_rating', 'resourse.id', 'user_rating.resourse_id')
-      .then(results => {
-        res.status(200).send(results);
+      .then(resources => {
+        resources.map(resource => {
+          allResources[resource.id] = {
+            ...resource,
+            totalLikes: 0,
+            countRatings: 0,
+            totalRating: 0,
+            comments: []
+          };
+        });
+        //console.log(allResources);
+        return allResources;
+      })
+      .then(() => {
+        return knex('user_comments')
+          .select(
+            'user_comments.id',
+            'users.username',
+            'user_comments.text',
+            'user_comments.updated_at',
+            'user_comments.resourse_id'
+          )
+          .join('users', 'users.id', 'user_comments.user_id');
+      })
+      .then(comments => {
+        let allCommnets = [];
+        comments.map(comment => {
+          let singleComment = { ...comment };
+
+          allResources[comment.resourse_id].comments.push(singleComment);
+        });
+      })
+      .then(() => {
+        return knex('user_likes').select('*');
+      })
+      .then(allLikes => {
+        allLikes.map(like => {
+          allResources[like.resourse_id].totalLikes++;
+        });
+      })
+      .then(() => {
+        return knex('user_resourse_rating').select('*');
+      })
+      .then(allRatings => {
+        allRatings.map(rating => {
+          allResources[rating.resourse_id].countRatings += 1;
+          allResources[rating.resourse_id].totalRating += rating.rating;
+        });
+      })
+      .then(() => {
+        console.log('ALL resources:', allResources);
+        return allResources;
+      })
+      .then(() => {
+        console.log(allResources);
+        res.status(200).render('index', { user_id, allResources });
       })
       .catch(err => {
         console.error(err.message);
