@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        </head>
+<header>
+        <% include partials/_header %> 
+</header>
+<body>
+
+<div id="new_resourse">
+        <h2>Add a New Resource to the Library</h2>
+      <div id="new_resourse_name" class="resourse_name">
+        Resource Name:
+        <div class="resourse_name">
+          <label for="resourse_name"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="resourse_name"
+            rows="1"
+            placeholder="NAME"
+          ></textarea>
+        </div>
+      </div>
+      <div id="new_resourse_url">
+        Resource URL:
+        <div class="resourse_url">
+          <label for="resourse_url"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="resourse_url"
+            rows="1"
+            placeholder="URL"
+          ></textarea>
+        </div>
+      </div>
+      <div class="new__resourse_intrest">
+        Category: <a class="hockey" href="#">Hockey</a><br />
+        <a class="html" href="#">HTML</a><br />
+        <a class="birds" href="#">Birds</a><br />
+        <label for="resourse_type"></label>
+      </div>
+      <div id="new_resourse_description">
+        Description:
+        <div class="resourse_description">
+          <label for="resourse_description"></label>
+          <textarea
+            class="form-control z-depth-1"
+            id="Interest1"
+            rows="2"
+            placeholder="A bit about your resource..."
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+
+
+    <div id="my_resourse_archive">
+        <h2>My Resources</h2>
+            <% for (let resource in allResources){%>
+              <% let avgRating = resource.totalRating/resource.countRating %>
+            <h2 id="resourse_name" class="resourse_name">
+              <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
+            </h2>
+            <div id="username">Submitted by: <%= allResources[resource].user_id%></div>
+            <div id="intrest">Category: <%= allResources[resource].intrest_id %></div>
+            <div id="description">Description: <%= allResources[resource].description %></div>
+            <div id="like">Likes: <%= allResources[resource].totalLikes %></div>
+            <div id="avgRating"> Rating: <% resource.totalRating/resource.countRating %>
+            </div>
+          </div>
