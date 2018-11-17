@@ -1,3 +1,6 @@
+// app.use(express.static('./styles/css'));
+
+
 // const userData = {
 //   "user": {
 //       "id": "1",

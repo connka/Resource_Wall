@@ -8,9 +8,9 @@
             </div>
             <div class="col-md-2">
             <% if (user_id) { %>
-                <p class="userIn"><a href="/api/users/:id/profile">Signed in as "<%= user_id %>"</a></p>
+                <p class="userID"><a href="/api/users/:id/profile">Signed in as "<%= user_id %>"</a></p>
                 <form method="POST" action="/api/users/logout">
-                    <button type="submit" class="btn btn-default navbar-btn">Sign Out</button> 
+                    <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> 
                 </form>
                 <% }  else { %>
                     <form method="GET" action="/api/users/login">

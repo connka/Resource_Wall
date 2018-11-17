@@ -1,7 +1,4 @@
-@import "compass/css3";
 
-/*Emmet article generation line : .col-xs-12.article-wrapper*5>article>a.more[href=#]>{more}^+.img-wrapper>img[src=http://lorempixel.com/150/150/nature]^+h1>Lorem3^+p>Lorem15
-*/
 
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 $size:150px;
@@ -12,17 +9,39 @@ body{
   background-color: $bg !important;
 }
 
-h1#header{
-  text-align: center;
-  padding:50px;
-  font-size: 62px;
-  font-family: "Pacifico";
-  @include text-shadow(0 2px 2px darken($bg,40%));
+header {
+  background-color: lightgrey;
+  font-family: "Helvetica";
 }
 
-.article-wrapper{
-  @include transition(width .4s);
+header .navbar-title {
+  font-size: 30px;
 }
+a {
+  color: black;
+  text-decoration: none
+}
+a:link {
+  color: black
+}
+a:visited{
+  color: black
+}
+
+header .userID {
+  text-align: right;
+  font-size: 18px;
+}
+
+header .my_toggle {
+  float: right;
+  font-size: 30;
+}
+
+#logoutbtn {
+  float: right
+}
+
 
 article{
   position:relative;
@@ -31,22 +50,19 @@ article{
   height: $size;
   margin-bottom: 30px;
   background-color: #FFF;
-  @include border-radius($size);
   cursor:pointer;
   
   .img-wrapper{
     position: absolute;
     top:- 10px;
     left:-10px;
-    @include border-radius(100px);
+  
     background-color: $bg;
     padding:10px;
     z-index: 1000;
-    @include transition(all .2s);
+    
     
     img{
-      @include border-radius(100px);
-      @include transition(all .2s);
       width: $size;
     }
   }
@@ -57,7 +73,6 @@ article{
     font-size: 24px;
     border-bottom: 2px solid $bg;
     color: #428bca;
-    @include transition(all .4s);
   }
   p{
     color: #888;
@@ -76,16 +91,12 @@ article{
     font-style:italic;
     opacity:0;
     color: #428bca !important;
-    @include transition(all .4s);
     text-decoration: none !important;
-    @include border-radius($size);
     font-family: "Pacifico";
-    @include text-shadow(0 1px 1px #AAA);
   }
    &:hover{
     .img-wrapper{
       padding:5px;
-      @include transform(rotate(5deg));
       img{
         width: $size + 10;
       }
@@ -100,7 +111,6 @@ article{
   article{
     padding:10px;
     height: $size*1.5;
-    @include border-radius(3px);
     margin-top: $size/2;
     
     .img-wrapper{
@@ -123,7 +133,6 @@ article{
     }
     
     a{
-       @include border-radius(3px);
        line-height: $size*1.5 +30;
     }
   }
