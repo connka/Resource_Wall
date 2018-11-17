@@ -100,17 +100,17 @@ module.exports = knex => {
     const user_id = req.session.user_id;
     if (id == req.session.user_id) {
       knex
-        .select('*')
-        .from('profiles')
-        .where('user_id', id)
-        .then(profile => {
-          console.log(profile);
-          res.render('userpage', profile[0]);
-        })
+       .select('*')
+       .from('profiles')
+       .where('user_id', id)
+       .then(profile => {
+         console.log(profile);
+         res.render('userpage', profile[0]);
+       })
         .catch(err => {
           console.log(err);
-          res.status(404).send('Mesaage : 404 :No resourses found');
-          res.status(404).redirect(`/api/users/${id}`);
+          // res.status(404).send('Mesaage : 404 :No resourses found');
+          res.status(404).redirect(`/api/users/${id}/profile`);
         });
     } else {
       res.status(401).redirect(`/api/users/${id}`);
@@ -205,13 +205,15 @@ module.exports = knex => {
       //.returning(['id', 'username'])
       .then(user => {
         console.log('POST /login:', user[0]);
-        if (bcrypt.compareSync(password, user[0].password)) {
+        const isRightPassword = bcrypt.compareSync(password, user[0].password);
+        if (isRightPassword) {
           console.log('POST /login: inside bcrypt', user[0]);
 
           req.session.user_id = user[0].id;
           console.log('From login:', user.username);
           res.status(200).redirect(`/api/users/${user[0].id}`);
         }
+        else {res.send("Something went wrong")}
       })
       .catch(err => {
         console.log('ERROR IS', err);
