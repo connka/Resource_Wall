@@ -205,13 +205,15 @@ module.exports = knex => {
       //.returning(['id', 'username'])
       .then(user => {
         console.log('POST /login:', user[0]);
-        if (bcrypt.compareSync(password, user[0].password)) {
+        const isRightPassword = bcrypt.compareSync(password, user[0].password);
+        if (isRightPassword) {
           console.log('POST /login: inside bcrypt', user[0]);
 
           req.session.user_id = user[0].id;
           console.log('From login:', user.username);
           res.status(200).redirect(`/api/users/${user[0].id}`);
         }
+        else {res.send("Something went wrong")}
       })
       .catch(err => {
         console.log('ERROR IS', err);
