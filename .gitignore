@@ -80,3 +80,7 @@ typings/
 
 # settings
 settings.json
+
+# package.json
+package.json
+package_lock.json

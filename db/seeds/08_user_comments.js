@@ -9,7 +9,7 @@ exports.seed = function(knex, Promise) {
           id: 1,
           text: 'great resourse!!!!',
           user_id: '1',
-          resourse_id: '3'
+          resourse_id: '1'
         }),
         knex('user_comments').insert({
           id: 2,
@@ -19,6 +19,24 @@ exports.seed = function(knex, Promise) {
         }),
         knex('user_comments').insert({
           id: 3,
+          text: 'i do not agree with the author',
+          user_id: '3',
+          resourse_id: '1'
+        }),
+        knex('user_comments').insert({
+          id: 4,
+          text: 'great resourse!!!!',
+          user_id: '1',
+          resourse_id: '2'
+        }),
+        knex('user_comments').insert({
+          id: 5,
+          text: 'loved it ,sharemore like these',
+          user_id: '2',
+          resourse_id: '2'
+        }),
+        knex('user_comments').insert({
+          id: 6,
           text: 'i do not agree with the author',
           user_id: '3',
           resourse_id: '2'
