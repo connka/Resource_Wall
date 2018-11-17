@@ -17,7 +17,7 @@
                         <div class="input-group">
                         <input id="search-bar" type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                                <button class="btn btn-default my_toggle" type="button">Search</button>
+                        <button class="btn btn-default my_toggle" type="button">Search</button>
                         </span>
                         </div>
                 </div>
@@ -48,7 +48,7 @@
       <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
       <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
-      <button id="comment_toggle">Comment</button>
+      <button class="comment_toggle">Comment</button>
     </div>
 
     <div class="comment_dropdown">
