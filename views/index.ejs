@@ -2,6 +2,8 @@
 <html lang="en">
         <head>
                 <link rel="stylesheet" href="styles/css/styles.css">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         </head>
 <header>
         <% include partials/_header %> 
@@ -21,14 +23,14 @@
                 </div>
                 <div class="col-md-2">
                 <div class="filter_dropdown">
-                        <button class="btn btn-secondary dropdown-toggle my_toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                        Filter by...
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Filter by... <span class="caret"></span>
                         </button>
-                        <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">HTML</a><br>
-                                <a class="dropdown-item" href="#">Hockey</a><br>
-                                <a class="dropdown-item" href="#">Birds</a><br>
-                        </div>
+                        <ul class="dropdown-menu">
+                                <li><a href="#">HTML</a></li>
+                                <li><a href="#">Hockey</a></li>
+                                <li><a href="#">Birds</a></li>
+                        </ul>
                 </div>
                 </div>
         </div>
