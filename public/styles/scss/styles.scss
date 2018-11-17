@@ -29,7 +29,7 @@ body {
   width: 50% auto;
 }
 
-#resourse_archive{
+.resourse_archive{
   background-color: #eee;
   border: solid 1px;
   border-radius: 5px;
@@ -38,7 +38,13 @@ body {
   width: 80% auto; 
 }
 
-#comment_dropdown {
+.resourse_archive .submitted_by{
+  float: right;
+  vertical-align: top;
+  font-size: 18;
+}
+
+.comment_dropdown {
   background-color: #eee;
   border: solid 1px;
   border-radius: 5px;

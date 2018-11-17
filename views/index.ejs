@@ -36,45 +36,33 @@
     </div>
     <br /><br /><br />
 
-
-    <div id="resourse_archive">
-      <% for (let resource in allResources){%>
+    <%for(let resource in allResources){%>
+    <div class="resourse_archive">
         <% let avgRating = resource.totalRating/resource.countRating %>
-      <h2 id="resourse_name" class="resourse_name">
-        <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
-      </div>
-      <div id="username"><%= allResources[resource].user_id%></div>
-      <div id="type">DATA TYPE</div>
-      <div id="intrest"><%= allResources[resource].intrest_id %></div>
-      <div id="description"><%= allResources[resource].description %></div>
-      <div id="like">Likes :<%= allResources[resource].totalLikes %></div>
-      <div id="avgRating"> Rating :
-        <%= allResources[resource].avgRating() || 0 %>
-      </div>
+        <div class="submitted_by">Submitted by: <%= allResources[resource].user_id%></div>
+      <h2 id="resourse_name" class="resourse_name"> 
+        <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a></h2>
+        <p id="description">Description: <%= allResources[resource].description %></p>
+      <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
+      <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
+      <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
     </div>
- 
-    <div id="comment_dropdown">
-      <div id="new_comment">
-        Comment:
-        <div class="new_comment">
+
+    <div class="comment_dropdown">
+        <form method="POST" action="" class="comment_box">
+        Comment on this resource:
           <label for="new_comment"></label>
           <textarea
             class="form-control z-depth-1"
             id="new_comment"
-            rows="2"
-            placeholder="Comment on this resource..."
-          ></textarea>
-        </div>
-      </div>
-      <div id="previous_comments"></div>
+            rows="2"></textarea>
+            <input type="submit" value="Submit">
+            </form>
+            <hr>
+      <div id="previous_comments"></div> <h3>Comments: </h3>
       <%for(let comment of allResources[resource].comments){%>
-        ---------------------------------------------
-        <p>User @ <%= comment.username%></p>
-        <p><%= comment.text%></p>
-        <p>
-              Posted on :  <%= comment.updated_at%>
-        </p>
-       ----------------------------------------------
+        <p><%= comment.username%> @ <%= comment.updated_at%>: 
+        <ul><%= comment.text%></ul>
       <%}%>
     </div>
 <hr>

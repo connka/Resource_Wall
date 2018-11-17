@@ -60,9 +60,9 @@
     <div id="my_resourse_archive">
         <h2>My Resources</h2>
             <% for (let resource in allResources){%>
-              <% let avgRating = resource.totalRating/resource.countRating %>
+            <% let avgRating = resource.totalRating/resource.countRating %>
             <h2 id="resourse_name" class="resourse_name">
-              <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
+            <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a>
             </h2>
             <div id="username">Submitted by: <%= allResources[resource].user_id%></div>
             <div id="intrest">Category: <%= allResources[resource].intrest_id %></div>
@@ -70,7 +70,7 @@
             <div id="like">Likes: <%= allResources[resource].totalLikes %></div>
             <div id="avgRating"> Rating: <% resource.totalRating/resource.countRating %>
             </div>
-          </div>
+        </div>
 
-          </body>
-          </html>
+    </body>
+</html>
