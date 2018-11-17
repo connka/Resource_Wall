@@ -9,6 +9,7 @@
 
 /register  - renders the regiser page    ----- done
 /login  - render login page      ------- done
+/:id  render  user resourses   ---- done
 /:id/profile = render profile if session- cookie   ---- done
 /:id  all owned / liked resourses  ------- done
 /:id/like   all liked ones  ------ done
