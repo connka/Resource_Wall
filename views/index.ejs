@@ -81,12 +81,6 @@
           ></textarea>
         </div>
       </div>
-      <div class="new_resourse_type">
-        Resource Type: <a class="text" href="#">Text</a><br />
-        <a class="video" href="#">Video</a><br />
-        <a class="audio" href="#">Audio</a><br />
-        <label for="resourse_type"></label>
-      </div>
       <div class="new__resourse_intrest">
         Category: <a class="hockey" href="#">Hockey</a><br />
         <a class="html" href="#">HTML</a><br />
@@ -127,7 +121,7 @@
       </div>
     </div>
  
-    <div id="dropdown">
+    <div id="comment_dropdown">
       <div id="new_comment">
         Comment:
         <div class="new_comment">
@@ -140,7 +134,7 @@
           ></textarea>
         </div>
       </div>
-      <div id="previous_comments">These are the older comments</div>
+      <div id="previous_comments"></div>
       <%for(let comment of allResources[resource].comments){%>
         ---------------------------------------------
         <p>User @ <%= comment.username%></p>
