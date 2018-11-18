@@ -65,18 +65,23 @@
                         </div>
                         </div>
         
-        <form method="POST" action="/api/users/:user_id/resourses/:resourse_id/comment" class="comment_box">
+        <!-- <form method="post" action="/api/users/<%=user_id%>/resourses/<%=allResources[resource].resourse_id%>/comment" class="comment_box"> -->
+                <form action="/api/users/<%=user_id%>/resourses/<%=allResources[resource].resourse_id%>/comment" method="post" class="comment_box">
         Comment on this resource:
+        <h1>HELLO</h1>
           <label for="new_comment"></label>
           <textarea
             class="form-control z-depth-1" 
             id="new_comment"
-            rows="2"></textarea>
+            rows="2"
+            name='text'></textarea>
             <input type="submit" value="Submit">
+
             </form>
             <hr>
       <div id="previous_comments"></div> <h3>Comments: </h3>
       <%for(let comment of allResources[resource].comments){%>
+        <h1>HELLO</h1>
         <p><%= comment.username%> @ <%= comment.updated_at%>: 
         <ul><%= comment.text%></ul>
       <%}%>

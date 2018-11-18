@@ -32,7 +32,7 @@ module.exports = knex => {
     // console.log('currentUser :', id, username);
     //const user_id = req.session.user_id;
     //const currentUser = getCurrentUser();
-    console.log('From users/:', user_id);
+    //console.log('From users/:', user_id);
     if (user_id) {
       knex
         .select()
@@ -40,7 +40,7 @@ module.exports = knex => {
         .where('id', user_id)
         .returning(['id', 'username'])
         .then(user => {
-          console.log('Inside user:', user[0]);
+          // console.log('Inside user:', user[0]);
           res.redirect(`/api/users/${user[0].id}`);
           // .render('login')
         });
@@ -69,21 +69,11 @@ module.exports = knex => {
   router.get('/:id', (req, res) => {
     let allResources = {};
     let user_id = req.session.user_id;
-    console.log('current user :', user_id);
+    //console.log('current user :', user_id);
     knex('resourses')
-      .select('*')
-      .distinct('resourses.id')
-      .from('resourses')
+      .select()
       .join('user_resourses', 'resourses.id', 'user_resourses.resourse_id')
-      .join('user_likes', 'user_resourses.user_id', 'user_likes.user_id')
-      .join('users', 'users.id', 'user_likes.resourse_id')
-      .groupBy(
-        'users.id',
-        'resourses.id',
-        'user_resourses.id',
-        'user_likes.user_id',
-        'user_likes.resourse_id'
-      )
+      .where('user_resourses.resourse_id', user_id)
       .then(resources => {
         resources.map(resource => {
           allResources[resource.id] = {
@@ -100,6 +90,30 @@ module.exports = knex => {
         });
       })
       .then(() => {
+        knex('resourses')
+          .select()
+          .join('user_likes', 'user_likes.resourse_id', 'resourses.id')
+          .where('user_likes.user_id', user_id)
+          .then(likedResourses => {
+            //console.log('liked resourses:', likedResourses);
+            likedResourses.map(resource => {
+              //delete allResources[resource.id];
+              allResources[resource.id] = {
+                user_id,
+                ...resource,
+                totalLikes: 0,
+                countRatings: 0,
+                totalRating: 0,
+                avgRating: function() {
+                  return this.totalRating / this.countRatings;
+                },
+                comments: []
+              };
+            });
+          });
+      })
+      .then(() => {
+        //console.log('All resourses', allResources);
         return knex('user_comments')
           .select(
             'user_comments.id',
@@ -108,37 +122,59 @@ module.exports = knex => {
             'user_comments.updated_at',
             'user_comments.resourse_id'
           )
-          .join('users', 'users.id', 'user_comments.user_id');
+          .innerJoin('users', 'users.id', 'user_comments.user_id');
       })
       .then(comments => {
-        let allCommnets = [];
         comments.map(comment => {
-          let singleComment = { ...comment };
-          allResources[comment.resourse_id].comments.push(singleComment);
+          // console.log('comment.resourse_id', comment.resourse_id);
+
+          // console.log(
+          //   'allResources[comment.resourse_id]',
+          //   allResources[comment.resourse_id]
+          // );
+          if (allResources[comment.resourse_id]) {
+            allResources[comment.resourse_id].comments.push(comment);
+          }
         });
       })
       .then(() => {
         return knex('user_likes').select('*');
       })
       .then(allLikes => {
+        //console.log('allLIkes,', allLikes);
         allLikes.map(like => {
-          allResources[like.resourse_id].totalLikes++;
+          if (allResources[like.resourse_id]) {
+            allResources[like.resourse_id].totalLikes++;
+          }
         });
       })
       .then(() => {
         return knex('user_resourse_rating').select('*');
       })
       .then(allRatings => {
+        //console.log('allRatings,', allRatings);
         allRatings.map(rating => {
-          allResources[rating.resourse_id].countRatings += 1;
-          allResources[rating.resourse_id].totalRating += rating.rating;
-          delete allResources[rating.resourse_id].password;
+          if (allResources[rating.resourse_id]) {
+            allResources[rating.resourse_id].countRatings += 1;
+            allResources[rating.resourse_id].totalRating += rating.rating;
+            delete allResources[rating.resourse_id].password;
+          }
         });
       })
       .then(() => {
-        let templateVars = { user_id, allResources };
-        console.log('TEMPLATE VARS:', templateVars);
-        //res.status(200).render('index', templateVars);
+        //console.log(allResources);
+        return knex('users')
+          .select('username')
+          .where('id', user_id);
+      })
+      .then(user => {
+        //console.log('Inside knex:', user[0].username);
+        let templateVars = {
+          currentUser: user[0].username,
+          user_id,
+          allResources
+        };
+        //console.log('TEMPLATE VARS:', templateVars);
         res.status(200).render('myresourses', templateVars);
       })
       .catch(err => {
@@ -153,7 +189,7 @@ module.exports = knex => {
 
   router.get('/:id/profile', (req, res) => {
     const { id } = req.params;
-    console.log(req.session.user_id);
+    //console.log(req.session.user_id);
     const user_id = req.session.user_id;
     if (id == req.session.user_id) {
       knex
@@ -161,11 +197,16 @@ module.exports = knex => {
         .from('profiles')
         .where('user_id', id)
         .then(profile => {
-          console.log(profile);
-          res.render('userpage', profile[0]);
+          // console.log(profile);
+
+          if (profile[0]) {
+            res.render('userpage', profile[0]);
+          } else {
+            res.status(404).send('404 : NO PROFILE FOUND');
+          }
         })
         .catch(err => {
-          console.log(err);
+          //console.log(err);
           // res.status(404).send('Mesaage : 404 :No resourses found');
           res.status(404).redirect(`/api/users/${id}/profile`);
         });
@@ -179,7 +220,7 @@ module.exports = knex => {
   // @access  Private
   router.get('/:id/rate', (req, res) => {
     const { id } = req.params;
-    console.log('GET /:id:', id);
+    //console.log('GET /:id:', id);
     knex
       .select('*')
       .from('resourses')
@@ -270,7 +311,7 @@ module.exports = knex => {
           console.log('From login:', user.username);
           res.status(200).redirect(`/api/users/${user[0].id}`);
         } else {
-          res.send('Something went wrong');
+          res.status(403).send('Mesaage: 403: Invalid username or password');
         }
       })
       .catch(err => {

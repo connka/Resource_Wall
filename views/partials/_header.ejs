@@ -17,8 +17,8 @@
             <div class="col-md-2">
             <% if (user_id) { %>
                 <div id="nav_userID"></div>
-                <p>Signed in as "<%= user_id %>"</p>
-                <a href="/api/users/:id/profile">Go to My Resources</a>
+                <p>Signed in as "<%= currentUser %>"</p>
+                <a href="/api/users/<%= user_id %>/profile">Go to My Resources</a>
                 <form method="POST" action="/api/users/logout">
                     <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> 
                 </form>

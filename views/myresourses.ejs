@@ -63,7 +63,7 @@
             <div class="resourse_archive">
               <% let avgRating = resource.totalRating/resource.countRating %>
                 <div class="submitted_by">Submitted by:
-                  <%= allResources[resource].user_id%>
+                  <%= allResources[resource].created_at %>
                 </div>
                 <h2 id="resourse_name" class="resourse_name">
                   <a href=<%= allResources[resource].url %>>
