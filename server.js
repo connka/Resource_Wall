@@ -67,7 +67,7 @@ app.use('/api/resourses', resoursesRoutes(knex));
 app.get('/', (req, res) => {
   let allResources = {};
   let user_id = req.session.user_id;
-  console.log('current user :', user_id);
+  console.log('current user from top :', user_id);
   knex('resourses')
     .select('*')
     //.join('intrests', 'intrests.id', 'resourses.intrest_id')
@@ -104,7 +104,7 @@ app.get('/', (req, res) => {
       //console.log('ALL resouses from comments ,', allResources);
       comments.map(comment => {
         let singleComment = { ...comment };
-        console.log('Single comment:', singleComment);
+        //console.log('Single comment:', singleComment);
         //if (allResources[comment.resourse_id]) {
 
         allResources[comment.resourse_id].comments.push(singleComment);
@@ -128,13 +128,13 @@ app.get('/', (req, res) => {
         allResources[rating.resourse_id].totalRating += rating.rating;
       });
     })
-    // .then(() => {
-    //   return allResources;
-    // })
+    .then(() => {
+      return allResources;
+    })
     .then(() => {
       if (user_id) {
         return knex('users')
-          .select('username')
+          .select('id', 'username')
           .where('id', user_id);
       } else {
         return [];
@@ -142,23 +142,20 @@ app.get('/', (req, res) => {
     })
     .then(user => {
       let templateVars;
-      console.log('All resourses :', allResources);
-      if (user[0]) {
+      if (user.length) {
         templateVars = {
           currentUser: user[0].username,
           user_id: user[0].id,
-          allResources
+          allResourcess
         };
-        res.status(200).render('index', templateVars);
       } else {
         templateVars = {
-          currentUser: undefined,
-          user_id: undefined,
+          currentUser: null,
+          user_id: null,
           allResources
         };
-        console.log('Template vars:', templateVars);
-        res.status(200).render('index', templateVars);
       }
+      res.status(200).render('index', templateVars);
     })
     .catch(err => {
       console.error(err.message);

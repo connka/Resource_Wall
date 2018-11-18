@@ -126,12 +126,6 @@ module.exports = knex => {
       })
       .then(comments => {
         comments.map(comment => {
-          // console.log('comment.resourse_id', comment.resourse_id);
-
-          // console.log(
-          //   'allResources[comment.resourse_id]',
-          //   allResources[comment.resourse_id]
-          // );
           if (allResources[comment.resourse_id]) {
             allResources[comment.resourse_id].comments.push(comment);
           }
@@ -141,7 +135,6 @@ module.exports = knex => {
         return knex('user_likes').select('*');
       })
       .then(allLikes => {
-        //console.log('allLIkes,', allLikes);
         allLikes.map(like => {
           if (allResources[like.resourse_id]) {
             allResources[like.resourse_id].totalLikes++;
@@ -152,7 +145,6 @@ module.exports = knex => {
         return knex('user_resourse_rating').select('*');
       })
       .then(allRatings => {
-        //console.log('allRatings,', allRatings);
         allRatings.map(rating => {
           if (allResources[rating.resourse_id]) {
             allResources[rating.resourse_id].countRatings += 1;
@@ -365,9 +357,9 @@ module.exports = knex => {
   });
 
   // @route   POST api/users/:id/resourse
-  // @desc  registers new resourse
+  // @desc post a new resourse
   // @access  Private
-  router.post('api/users/:id/resourse', (req, res) => {
+  router.post('/:id/resourse', (req, res) => {
     const { id } = req.params;
     const { url, title, description, intrest_id } = req.body;
     let newResourse;
