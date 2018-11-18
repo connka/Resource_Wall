@@ -69,7 +69,7 @@ module.exports = knex => {
   router.get('/:id', (req, res) => {
     let allResources = {};
     let user_id = req.session.user_id;
-    //console.log('current user :', user_id);
+    console.log('CURRENT USER ALEX :', user_id);
     knex('resourses')
       .select()
       .join('user_resourses', 'resourses.id', 'user_resourses.resourse_id')
@@ -166,7 +166,7 @@ module.exports = knex => {
           user_id,
           allResources
         };
-        //console.log('TEMPLATE VARS:', templateVars);
+        console.log('TEMPLATE VARS:', templateVars);
         res.status(200).render('myresourses', templateVars);
       })
       .catch(err => {
@@ -189,10 +189,13 @@ module.exports = knex => {
         .from('profiles')
         .where('user_id', id)
         .then(profile => {
-          // console.log(profile);
-
+          console.log(profile);
           if (profile[0]) {
-            res.render('userpage', profile[0]);
+            res.render('userpage', {
+              user_id: profile[0].user_id,
+              currentUser: profile[0].name,
+              ...profile[0]
+            });
           } else {
             res.status(404).send('404 : NO PROFILE FOUND');
           }
@@ -389,7 +392,7 @@ module.exports = knex => {
       })
       .then(function(resp) {
         console.log('Transaction complete.');
-        res.status(201).send(newResourse);
+        res.status(201).redirect(`/api/users/${id}`);
       })
       .catch(function(err) {
         console.error(err);

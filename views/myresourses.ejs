@@ -132,6 +132,7 @@
                     </form>
                     <hr>
               <div id="previous_comments"></div> <h3>Comments: </h3>
+              <!-- <% console.log('ejs') %> -->
               <%for(let comment of allResources[resource].comments){%>
                 <p><%= comment.username%> @ <%= comment.updated_at%>: 
                 <ul><%= comment.text%></ul>
