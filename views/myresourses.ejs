@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-        </head>
-<header>
-        <% include partials/_header %> 
-</header>
+  <head>
+  </head>
+  <header>
+    <% include partials/_header %> 
+    <link rel="stylesheet" href="/styles/css/nav.css">
+    <link rel="stylesheet" href="/styles/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script></header>
 <body>
-
 <div id="new_resourse">
         <h2>Add a New Resource to the Library</h2>
       <div id="new_resourse_name" class="resourse_name">
@@ -58,7 +61,7 @@
 
 
     <div id="my_resourse_archive">
-        <h2>My Resources</h2>
+        <h2 id=myResourcesHeader>My Resources</h2>
           <%for(let resource in allResources){%>
             <div class="resourse_archive">
               <% let avgRating = resource.totalRating/resource.countRating %>

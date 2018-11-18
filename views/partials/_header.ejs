@@ -16,19 +16,20 @@
             </div>
             <div class="col-md-2">
             <% if (user_id) { %>
-                <div id="nav_userID"></div>
+                <div id="nav_userID">
                 <p>Signed in as "<%= user_id %>"</p>
                 <a href="/api/users/:id/profile">Go to My Resources</a>
                 <form method="POST" action="/api/users/logout">
                     <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> 
                 </form>
             </div>
+            </div>
                 <% }  else { %>
                     <form method="GET" action="/api/users/login">
-                        <button type="submit" class="btn btn-default navbar-btn my_toggle">Sign in</button>
+                        <button type="submit" id="loginbtn" class="btn btn-default navbar-btn my_toggle">Sign in</button>
                     </form>
                     <form method="GET" action="/api/users/register">
-                        <button type="submit" class="btn btn-default navbar-btn my_toggle">Register</button>
+                        <button type="submit" id="registerbtn" class="btn btn-default navbar-btn my_toggle">Register</button>
                     </form>
                 <% } %>
             </div></br></br>

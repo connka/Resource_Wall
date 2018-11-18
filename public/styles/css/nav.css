@@ -15,7 +15,8 @@ header {
   clear: none; }
 
 header .navbar-title {
-  font-size: 30px; }
+  font-size: 50px; 
+  text-decoration: underline; }
 
 #nav_userID {
   text-align: right;
@@ -29,3 +30,19 @@ header .my_toggle {
   float: right;
   border-radius: 5px;
   background-color: white; }
+
+#loginbtn {
+    float: right;
+    border-radius: 5px;
+    background-color: white; }
+
+#registerbtn {
+    float: right;
+    border-radius: 5px;
+    background-color: white; }
+
+#myResourcesHeader {
+  margin-left: 1em 2em;
+  color: blue;
+  padding: 0em 1.1em; 
+}
