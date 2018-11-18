@@ -11,12 +11,12 @@
         <div class="row">
             <div class="navbar-header">
                 <div class="col-md-10">
-                    <a class="navbar-title" href="/">The Resource Wall</a>
+                    <h1 class="navbar-title">The Resource Wall</h1>
                 </div>
             </div>
             <div class="col-md-2">
             <% if (user_id) { %>
-                <div id="nav_userID">
+                <div id="nav_userID"></div>
                 <p>Signed in as "<%= user_id %>"</p>
                 <a href="/api/users/:id/profile">Go to My Resources</a>
                 <form method="POST" action="/api/users/logout">

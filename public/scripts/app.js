@@ -1,6 +1,5 @@
 // app.use(express.static('./styles/css'));
 
-
 // const userData = {
 //   "user": {
 //       "id": "1",
@@ -63,9 +62,11 @@ function loadUsers(callback) {
 $("document").ready(() => {
   loadUsers(renderUsers);
 
+  //Comment Button Toggle:
+$(".comment_toggle").on("click", () => {
+  $(".comment_dropdown").slideToggle();
+  });
 });
-
-
 
 // //Render User Data
 // $("document").ready(() => {

@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
         <head>
+
         </head>
 <header>
         <% include partials/_header %> 
+        <script src="/scripts/app.js"></script>
 </header>
 <body>
         <h1>Resources</h1>
         <div id="filter_bar">
         <div class="col-md-10">
-                <div class="newResourceButton">
-                    <button id="newResource" class="btn btn-default my_toggle" type="button">New Resource</button>
-                </div>
                         <div class="input-group">
                         <input id="search-bar" type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                                <button class="btn btn-default my_toggle" type="button">Search</button>
+                        <button class="btn btn-default my_toggle" type="button">Search</button>
                         </span>
                         </div>
                 </div>
@@ -46,14 +45,31 @@
       <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
       <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
+      <% if (user_id) { %>
+      <button class="comment_toggle">Give feedback on this resource</button>
+      <% } %>
     </div>
-
-    <div class="comment_dropdown">
-        <form method="POST" action="" class="comment_box">
+    <div hidden class="comment_dropdown">
+        <a href=#>Like</a> <div class="col-md-2">
+                <div class="resource_rating">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Rating<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                        </ul>
+                        </div>
+                        </div>
+        
+        <form method="POST" action="/api/users/:user_id/resourses/:resourse_id/comment" class="comment_box">
         Comment on this resource:
           <label for="new_comment"></label>
           <textarea
-            class="form-control z-depth-1"
+            class="form-control z-depth-1" 
             id="new_comment"
             rows="2"></textarea>
             <input type="submit" value="Submit">
