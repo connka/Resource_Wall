@@ -146,7 +146,7 @@ app.get('/', (req, res) => {
         templateVars = {
           currentUser: user[0].username,
           user_id: user[0].id,
-          allResourcess
+          allResources
         };
       } else {
         templateVars = {
