@@ -12,7 +12,12 @@
     <script src="/scripts/app.js"></script>
   </header>
     <body>
-  
+
+<div id="user_page" >
+  <h1><%= currentUser %>'s Resource Page</h1>
+  <a href="<%= user_id %>/profile">Edit profile</p>
+</div>
+
 <form id="new_resourse" method="POST" action="<%= user_id%>/resourse">
         <h2>Add a New Resource to the Library</h2>
       <div id="new_resourse_name" class="resourse_name">
@@ -68,11 +73,7 @@
           </div>
     </form>
 
-
     <br />
-    <br />
-    <br />
-
 
     <div id="my_resourse_archive">
         <h2 id=myResourcesHeader>My Resources</h2>

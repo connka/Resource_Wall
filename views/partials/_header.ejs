@@ -18,10 +18,11 @@
             <% if (user_id) { %>
                 <div id="nav_userID">
                 <p>Signed in as "<%= currentUser %>"</p>
-                <a href="/api/users/<%= user_id %>">Go to My Resources</a>
                 <form method="POST" action="/api/users/logout">
-                    <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> 
+                    <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> <br><br>
                 </form>
+                <a href="/">Home</a><br>
+                <a href="/api/users/<%= user_id %>">Go to My Resources</a>
             </div>
             </div>
                 <% }  else { %>

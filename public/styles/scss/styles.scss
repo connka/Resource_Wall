@@ -18,6 +18,15 @@ body {
   font-family: 'Courier New', Courier, monospace;
 }
 
+#user_page {
+  background-color: #eee;
+  border: solid 1px;
+  border-radius: 5px;
+  margin: 1em 2em;
+  padding: 10px;
+  width: 80% auto; 
+}
+
 #new_resourse{
   background-color: #eee;
   border: solid 1px;
@@ -54,3 +63,4 @@ body {
   padding: 10px;
   width: 80% auto; 
 }
+
