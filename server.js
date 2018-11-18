@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
     .then(resources => {
       resources.map(resource => {
         allResources[resource.id] = {
-          user_id,
+          //user_id,
           ...resource,
           totalLikes: 0,
           countRatings: 0,
@@ -85,27 +85,8 @@ app.get('/', (req, res) => {
           comments: []
         };
       });
-      //console.log(allResources);
-      //return allResources;
     })
-    // knex('resourses')
-    //   .select('intrests.name', 'resourses.id')
-    //   .join('intrests', 'intrests.id', 'resourses.intrest_id')
-    //   .then(allIntrests => {
-    //     console.log('ALL INTREST:,', allIntrests);
-    //     // allIntrests.map(intrest => {
-    //     //   allResources[intrestresource.id] = {
-    //     //     user_id,
-    //     //     ...resource,
-    //     //     totalLikes: 0,
-    //     //     countRatings: 0,
-    //     //     totalRating: 0,
-    //     //     comments: []
-    //     //   };
-    //     //});
-    //     //console.log(allResources);
-    //     //return allResources;
-    //   })
+
     .then(() => {
       return knex('user_comments')
         .select(
@@ -115,14 +96,19 @@ app.get('/', (req, res) => {
           'user_comments.updated_at',
           'user_comments.resourse_id'
         )
-        .join('users', 'users.id', 'user_comments.user_id');
+        .join('users', 'users.id', 'user_comments.user_id')
+        .join('resourses', 'resourses.id', 'user_comments.resourse_id');
     })
     .then(comments => {
-      let allCommnets = [];
+      //let allCommnets = [];
+      //console.log('ALL resouses from comments ,', allResources);
       comments.map(comment => {
         let singleComment = { ...comment };
         console.log('Single comment:', singleComment);
+        //if (allResources[comment.resourse_id]) {
+
         allResources[comment.resourse_id].comments.push(singleComment);
+        //}
       });
     })
     .then(() => {
@@ -140,20 +126,39 @@ app.get('/', (req, res) => {
       allRatings.map(rating => {
         allResources[rating.resourse_id].countRatings += 1;
         allResources[rating.resourse_id].totalRating += rating.rating;
-        // allResources[rating.resourse_id].avgRating =
-        //   allResources[rating.resourse_id].totalRating /
-        //   allResources[rating.resourse_id].countRatings;
       });
     })
+    // .then(() => {
+    //   return allResources;
+    // })
     .then(() => {
-      //console.log('ALL resources:', allResources);
-      return allResources;
+      if (user_id) {
+        return knex('users')
+          .select('username')
+          .where('id', user_id);
+      } else {
+        return [];
+      }
     })
-    .then(() => {
-      //console.log(allResources);
-      let templateVars = { user_id, allResources };
-      console.log('TEMPLATE VARS:', templateVars);
-      res.status(200).render('index', templateVars);
+    .then(user => {
+      let templateVars;
+      console.log('All resourses :', allResources);
+      if (user[0]) {
+        templateVars = {
+          currentUser: user[0].username,
+          user_id: user[0].id,
+          allResources
+        };
+        res.status(200).render('index', templateVars);
+      } else {
+        templateVars = {
+          currentUser: undefined,
+          user_id: undefined,
+          allResources
+        };
+        console.log('Template vars:', templateVars);
+        res.status(200).render('index', templateVars);
+      }
     })
     .catch(err => {
       console.error(err.message);
