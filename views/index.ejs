@@ -46,10 +46,25 @@
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
       <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
       <% if (user_id) { %>
-      <button class="comment_toggle">Comment</button>
+      <button class="comment_toggle">Give feedback on this resource</button>
       <% } %>
     </div>
     <div hidden class="comment_dropdown">
+        <a href=#>Like</a> <div class="col-md-2">
+                <div class="resource_rating">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Rating<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                        </ul>
+                        </div>
+                        </div>
+        
         <form method="POST" action="/api/users/:user_id/resourses/:resourse_id/comment" class="comment_box">
         Comment on this resource:
           <label for="new_comment"></label>
