@@ -40,7 +40,7 @@ header .my_toggle {
   border-radius: 5px;
   background-color: white; }
 
-.logo {
+img {
   float: left;
-  height: 80px;
-  width: 80px; }
+  height: 50%;
+  width: auto; }
