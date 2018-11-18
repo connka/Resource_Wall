@@ -5,14 +5,33 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 module.exports = knex => {
+  // const getCurrentUser = req => {
+  //   let currentId = req.session.user_id;
+  //   knex('users')
+  //     .select('id', 'username')
+  //     .where('id', currentId)
+  //     .then(user => {
+  //       req.user = user;
+  //       next();
+  //     });
+  // };
+
   // -------- ALL GET ROUTES ----------
 
   // @route   GET api/users
   // @desc    check for currentUser else redirect to login
   // @access  Public
+  //router.use(getCurrentUser);
 
   router.get('/', (req, res) => {
-    const user_id = req.session.user_id;
+    // req.userPromise.then(user => {
+    //   console.log('CurrentUser :', user);
+    // });
+    // const { id, username } = req.user;
+    // console.log(getCurrentUser());
+    // console.log('currentUser :', id, username);
+    //const user_id = req.session.user_id;
+    //const currentUser = getCurrentUser();
     console.log('From users/:', user_id);
     if (user_id) {
       knex
@@ -44,7 +63,7 @@ module.exports = knex => {
   // @access  Public
 
   router.get('/login', (req, res) => {
-    res.status(200).render('login.ejs');
+    res.status(200).render('login');
   });
 
   router.get('/:id', (req, res) => {
@@ -273,12 +292,24 @@ module.exports = knex => {
   // @access  Public
   router.post('/register', (req, res) => {
     const { username, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10);
     knex('users')
-      .returning(['id', 'username'])
-      .insert({
-        username,
-        password: hashedPassword
+      //.returning('username')
+      .select('username')
+      .where('username', username)
+      .then(result => {
+        console.log('user exists', result);
+        if (result.length) {
+          throw error('username not available');
+        }
+      })
+      .then(() => {
+        const hashedPassword = bcrypt.hashSync(password, 10);
+        return knex('users')
+          .returning(['id', 'username'])
+          .insert({
+            username,
+            password: hashedPassword
+          });
       })
       .then(user => {
         console.log('sEtting cookie in register:', user[0].id);
