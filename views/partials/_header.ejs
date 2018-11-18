@@ -1,7 +1,7 @@
 <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="/styles/css/nav.css">
         <link rel="stylesheet" href="styles/css/styles.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
@@ -10,15 +10,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="navbar-header">
-                <div class="col-md-10">
-                    <h1 class="navbar-title">The Resource Wall</h1>
+                <div class=".col-sm-5 .col-md-6">
+                    <h1 class="navbar-title" href="/api/index/">The Resource Wall</h1>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class=".col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0">
             <% if (user_id) { %>
                 <div id="nav_userID">
                 <p>Signed in as "<%= user_id %>"</p>
-                <a href="/api/users/:id/profile">Go to My Resources</a>
+                <a href="/api/users/<%= user_id%>">Go to My Resources</a>
                 <form method="POST" action="/api/users/logout">
                     <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> 
                 </form>
