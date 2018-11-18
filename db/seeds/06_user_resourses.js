@@ -6,12 +6,10 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         // Inserts seed entries
         knex('user_resourses').insert({
-          id: 1,
           user_id: '1',
           resourse_id: '1'
         }),
         knex('user_resourses').insert({
-          id: 2,
           user_id: '2',
           resourse_id: '2'
         }),

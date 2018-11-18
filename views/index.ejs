@@ -21,6 +21,7 @@
                 <div class=".col-sm-5 .col-sm-offset-2 .col-md-3 .col-md-offset-0">
                 <div class="filter_dropdown">
                                 <select>
+                                        <option>--Resource Category--</option>
                                         <option value="id: 1">Sports</option>
                                         <option value="id: 2">Web Development</option>
                                         <option value="id: 3">Food</option>
@@ -71,25 +72,43 @@
                                 <li><a href="#">5</a></li>
                         </ul>
                 </div>
-    </div>
+        </div>
 
         <form method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/comment" class="comment_box">
         Comment on this resource:
+<<<<<<< HEAD
+        <label for="new_comment"></label>
+        <textarea
+        class="form-control z-depth-1" 
+        id="new_comment"
+        rows="2"></textarea>
+        <input type="submit" value="Submit">
+        </form>
+        <hr>
+        <div id="previous_comments"></div> <h3>Comments: </h3>
+        <%for(let comment of allResources[resource].comments){%>
+=======
+        <h1>HELLO</h1>
           <label for="new_comment"></label>
           <textarea
             class="form-control z-depth-1" 
             id="new_comment"
-            rows="2"></textarea>
+            rows="2"
+            name='text'></textarea>
             <input type="submit" value="Submit">
+
             </form>
             <hr>
       <div id="previous_comments"></div> <h3>Comments: </h3>
       <%for(let comment of allResources[resource].comments){%>
+        <h1>HELLO</h1>
+>>>>>>> 06d4fda811b9c7cb18fe0e7138a5a527b53cb9a9
         <p><%= comment.username%> @ <%= comment.updated_at%>: 
         <ul><%= comment.text%></ul>
-      <%}%>
-    </div>
+        <%}%>
+</div>
 <hr>
-    <%}%>
-  </body>
+        <%}%>
+
+</body>
 </html>
