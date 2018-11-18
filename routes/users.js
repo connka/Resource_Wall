@@ -359,11 +359,7 @@ module.exports = knex => {
   // @route   POST api/users/:id/resourse
   // @desc post a new resourse
   // @access  Private
-<<<<<<< HEAD
   router.post('/:id/resourse', (req, res) => {
-=======
-  router.post('api/users/:id/resourse', (req, res) => {
->>>>>>> 4275ceb1bc094af8f39bd7364262d7c8b5f25d1b
     const { id } = req.params;
     const { url, title, description, intrest_id } = req.body;
     let newResourse;
