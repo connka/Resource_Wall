@@ -17,7 +17,7 @@ header {
 }
 
 header .navbar-title {
-    font-size: 30px;
+    font-size: 48px;
 }
 
 #nav_userID {
@@ -28,6 +28,18 @@ header .navbar-title {
 header .my_toggle {
     float: right;
     font-size: 30;
+}
+
+#loginbtn {
+    float: right;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#registerbtn {
+    float: right;
+    border-radius: 5px;
+    background-color: white;
 }
 
 #logoutbtn {

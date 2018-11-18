@@ -20,15 +20,24 @@
                 </div>
                 <div class="col-md-2">
                 <div class="filter_dropdown">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        Filter by... <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                                <li><a href="#">HTML</a></li>
-                                <li><a href="#">Hockey</a></li>
-                                <li><a href="#">Birds</a></li>
-                        </ul>
-                </div>
+                                <select>
+                                        <option>--Resource Category--</option>
+                                        <option value="id: 1">Sports</option>
+                                        <option value="id: 2">Web Development</option>
+                                        <option value="id: 3">Food</option>
+                                        <option value="id: 4">Reading</option>
+                                        <option value="id: 5" selected>Travelling</option>
+                                        <option value="id: 6" selected>Fishing</option>
+                                        <option value="id: 7" selected>Crafts</option>
+                                        <option value="id: 8" selected>Movies</option>
+                                        <option value="id: 9" selected>Music</option>
+                                        <option value="id: 10" selected>Gardening</option>
+                                        <option value="id: 11" selected>Games</option>
+                                        <option value="id: 12" selected>Hunting</option>
+                                        <option value="id: 13" selected>Restaurants</option>
+                                        <option value="id: 14" selected>Cars</option>
+                                        </select>
+                                        
                 </div>
         </div>
       </div>
@@ -62,11 +71,10 @@
                                 <li><a href="#">4</a></li>
                                 <li><a href="#">5</a></li>
                         </ul>
-                        </div>
-                        </div>
-        
-        <!-- <form method="post" action="/api/users/<%=user_id%>/resourses/<%=allResources[resource].resourse_id%>/comment" class="comment_box"> -->
-                <form action="/api/users/<%=user_id%>/resourses/<%=allResources[resource].resourse_id%>/comment" method="post" class="comment_box">
+                </div>
+    </div>
+
+        <form method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/comment" class="comment_box">
         Comment on this resource:
         <h1>HELLO</h1>
           <label for="new_comment"></label>

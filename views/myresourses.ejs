@@ -1,64 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-        </head>
-<header>
-        <% include partials/_header %> 
-</header>
-<body>
-
-<div id="new_resourse">
+  <head>
+  </head>
+  <header>
+    <% include partials/_header %> 
+    <link rel="stylesheet" href="/styles/css/nav.css">
+    <link rel="stylesheet" href="/styles/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/scripts/app.js"></script>
+  </header>
+    <body>
+  
+<form id="new_resourse" method="POST" action="/api/<%= user_id%>/resourse">
         <h2>Add a New Resource to the Library</h2>
       <div id="new_resourse_name" class="resourse_name">
         Resource Name:
-        <div class="resourse_name">
-          <label for="resourse_name"></label>
           <textarea
             class="form-control z-depth-1"
-            id="resourse_name"
+            id="resourse_name
             rows="1"
-            placeholder="NAME"
+            placeholder="Name"
+            name="title"
           ></textarea>
         </div>
-      </div>
       <div id="new_resourse_url">
         Resource URL:
-        <div class="resourse_url">
-          <label for="resourse_url"></label>
           <textarea
             class="form-control z-depth-1"
             id="resourse_url"
             rows="1"
             placeholder="URL"
+            name="url"
           ></textarea>
+        </div><br>
+        <div class="interest_id_select">
+            <select class="interest_id" id="interest_id">
+                <option>--Resource Category--</option>
+                <option value="id: 1">Sports</option>
+                <option value="id: 2">Web Development</option>
+                <option value="id: 3">Food</option>
+                <option value="id: 4">Reading</option>
+                <option value="id: 5" selected>Travelling</option>
+                <option value="id: 6" selected>Fishing</option>
+                <option value="id: 7" selected>Crafts</option>
+                <option value="id: 8" selected>Movies</option>
+                <option value="id: 9" selected>Music</option>
+                <option value="id: 10" selected>Gardening</option>
+                <option value="id: 11" selected>Games</option>
+                <option value="id: 12" selected>Hunting</option>
+                <option value="id: 13" selected>Restaurants</option>
+                <option value="id: 14" selected>Cars</option>
+            </select>
+            </select>
         </div>
-      </div>
-      <div class="new__resourse_intrest">
-        Category: <a class="hockey" href="#">Hockey</a><br />
-        <a class="html" href="#">HTML</a><br />
-        <a class="birds" href="#">Birds</a><br />
-        <label for="resourse_type"></label>
-      </div>
       <div id="new_resourse_description">
         Description:
-        <div class="resourse_description">
-          <label for="resourse_description"></label>
           <textarea
             class="form-control z-depth-1"
             id="Interest1"
             rows="2"
             placeholder="A bit about your resource..."
+            name="description"
           ></textarea>
-        </div>
-      </div>
-    </div>
+          <input type="submit" value="Submit">
+          </div>
+    </form>
+
+
     <br />
     <br />
     <br />
 
 
     <div id="my_resourse_archive">
-        <h2>My Resources</h2>
+        <h2 id=myResourcesHeader>My Resources</h2>
           <%for(let resource in allResources){%>
             <div class="resourse_archive">
               <% let avgRating = resource.totalRating/resource.countRating %>
@@ -82,29 +99,45 @@
                 <ul id="avgRating"> Rating:
                   <%= allResources[resource].avgRating() || 0 %>
                 </ul>
+            <% if (user_id) { %>
+              <button class="comment_toggle">Give feedback on this resource</button>
+              <% } %>
             </div>
-          
-            <div class="comment_dropdown">
-              <form method="POST" action="" class="comment_box">
-                Comment on this resource:
-                <label for="new_comment"></label>
-                <textarea class="form-control z-depth-1" id="new_comment" rows="2"></textarea>
-                <input type="submit" value="Submit">
-              </form>
-              <hr>
-              <div id="previous_comments"></div>
-              <h3>Comments: </h3>
-              <%for(let comment of allResources[resource].comments){%>
-                <p>
-                  <%= comment.username%> @
-                    <%= comment.updated_at%>:
-                      <ul>
-                        <%= comment.text%>
-                      </ul>
-                      <%}%>
-            </div>
-            <hr>
-            <%}%>
 
-    </body>
-</html>
+
+            <div hidden class="comment_dropdown">
+                <a href=#>Like</a> <div class="col-md-2">
+                        <div class="resource_rating">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                Rating<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                </ul>
+                        </div>
+            </div>
+        
+                <form method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/comment" class="comment_box">
+                Comment on this resource:
+                  <label for="new_comment"></label>
+                  <textarea
+                    class="form-control z-depth-1" 
+                    id="new_comment"
+                    rows="2"></textarea>
+                    <input type="submit" value="Submit">
+                    </form>
+                    <hr>
+              <div id="previous_comments"></div> <h3>Comments: </h3>
+              <%for(let comment of allResources[resource].comments){%>
+                <p><%= comment.username%> @ <%= comment.updated_at%>: 
+                <ul><%= comment.text%></ul>
+              <%}%>
+            </div>
+        <hr>
+            <%}%>
+          </body>
+        </html>
