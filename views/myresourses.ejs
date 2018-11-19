@@ -21,10 +21,10 @@
 <form id="new_resourse" method="POST" action="<%= user_id%>/resourse">
         <h2>Add a New Resource to the Library</h2>
       <div id="new_resourse_name" class="resourse_name">
-        Resource Name:
+        Resource Title:
           <textarea
             class="form-control z-depth-1"
-            id="resourse_name
+            id="resourse_name"
             rows="1"
             placeholder="Name"
             name="title"></textarea>
@@ -95,53 +95,8 @@
                 <ul id="avgRating"> Rating:
                 <%= Math.round(allResources[resource].avgRating() || 0) %>
                 </ul>
-            <% if (user_id) { %>
-              <button class="comment_toggle">Leave Feedback</button>
-              <% } %>
             </div>
-
-
-            <div hidden class="comment_dropdown">
-                <form class="like" method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].id%>/like">
-                        
-
-        <button class="likebtn">Save Resource</button></form><br>
-                <div class="col-md-2">
-        <form class="resourse_rating" method="POST" action="api/users/<%= user_id%>/resourses/<%= allResources[resource].id%>/rate">
-                                                <select  name="rating" class="user_resourse_rating">
-                                                        <option selected>--Resource Rating--</option>
-                                                        <option value='1'>1</option>
-                                                        <option value='2'>2</option>
-                                                        <option value='3'>3</option>
-                                                        <option value='4'>4</option>
-                                                        <option value='5'>5</option>
-                                                </select>
-                                        <button class="ratingbtn">Submit Rating</button>
-                                        </form>
-                </div>
-
-                <br><br><br>
-
-        <form method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].id%>/comment" class="comment_box">
-        Comment on this resource:
-
-          <label for="new_comment"></label>
-          <textarea
-            class="form-control z-depth-1" 
-            id="new_comment"
-            rows="2"
-            name='text'></textarea>
-            <input type="submit" value="Submit">
-
-            </form>
-            <hr>
-      <div id="previous_comments"></div> <h3>Comments: </h3>
-      <%for(let comment of allResources[resource].comments){%>
-        <p><%= comment.username%> @ <%= comment.updated_at%>: 
-        <ul><%= comment.text%></ul>
-        <%}%>
-</div>
-</div>
+    </div>            
 <hr>
         <%}%>
 

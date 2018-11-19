@@ -65,6 +65,18 @@ body {
     width: 50%;
 }
 
+#new_resourse_name {
+    width: 30%;
+}
+
+#new_resourse_url {
+    width: 50%;
+}
+
+#new_resourse_description {
+    width: 50%;
+}
+
 a {
   color: black;
 }
