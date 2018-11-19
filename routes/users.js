@@ -23,32 +23,32 @@ module.exports = knex => {
   // @access  Public
   //router.use(getCurrentUser);
 
-  router.get('/', (req, res) => {
-    // req.userPromise.then(user => {
-    //   console.log('CurrentUser :', user);
-    // });
-    // const { id, username } = req.user;
-    // console.log(getCurrentUser());
-    // console.log('currentUser :', id, username);
-    //const user_id = req.session.user_id;
-    //const currentUser = getCurrentUser();
-    //console.log('From users/:', user_id);
-    if (user_id) {
-      knex
-        .select()
-        .from('users')
-        .where('id', user_id)
-        .returning(['id', 'username'])
-        .then(user => {
-          // console.log('Inside user:', user[0]);
-          res.redirect(`/api/users/${user[0].id}`);
-          // .render('login')
-        });
-    } else {
-      req.session = null;
-      res.redirect(`/api/users/login`);
-    }
-  });
+  // router.get('/', (req, res) => {
+  //   // req.userPromise.then(user => {
+  //   //   console.log('CurrentUser :', user);
+  //   // });
+  //   // const { id, username } = req.user;
+  //   // console.log(getCurrentUser());
+  //   // console.log('currentUser :', id, username);
+  //   //const user_id = req.session.user_id;
+  //   //const currentUser = getCurrentUser();
+  //   //console.log('From users/:', user_id);
+  //   if (user_id) {
+  //     knex
+  //       .select()
+  //       .from('users')
+  //       .where('id', user_id)
+  //       .returning(['id', 'username'])
+  //       .then(user => {
+  //         // console.log('Inside user:', user[0]);
+  //         res.redirect(`/api/users/${user[0].id}`);
+  //         // .render('login')
+  //       });
+  //   } else {
+  //     req.session = null;
+  //     res.redirect(`/api/users/login`);
+  //   }
+  // });
 
   // @route   GET api/users/register
   // @desc    renders register page
@@ -488,6 +488,15 @@ module.exports = knex => {
     const { user_id, resourse_id } = req.params;
     console.log('req.params:', req.params);
     knex('user_likes')
+      .select()
+      .where({
+        user_id: user_id,
+        resourse_id: resourse_id
+      })
+      .then(result => {
+        console.log(result);
+      });
+    knex('user_likes')
       .insert({
         user_id: user_id,
         resourse_id: resourse_id
@@ -530,8 +539,13 @@ module.exports = knex => {
   // @access  Private
   router.post('/:user_id/resourses/:resourse_id/rate', (req, res) => {
     const { user_id, resourse_id } = req.params;
-    const { rating } = req.body;
+    let userRating = req.body.rating;
+    let rating = +userRating;
+    console.log('rating', rating);
+    //const { rating } = req.body;
     console.log('req.params:', req.params);
+    console.log('req.body:', req.body);
+    // console.log('rating', rating);
     knex('user_resourse_rating')
       .insert({
         rating: rating,

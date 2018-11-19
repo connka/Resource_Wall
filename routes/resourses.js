@@ -9,14 +9,17 @@ module.exports = knex => {
   // @access  Public
 
   router.get('/', (req, res) => {
+    let user_id = req.session.user_id;
     let allResources = {};
     knex('resourses')
       .select('*')
       .join('user_resourses', 'resouses.id', 'user_resourses.resouse_id')
       .join('users', 'user_resourses.user_id', 'user.id')
       .then(resources => {
+        console.log('Inside resourses file', resources);
         resources.map(resource => {
           allResources[resource.id] = {
+            user_id,
             ...resource,
             totalLikes: 0,
             countRatings: 0,
