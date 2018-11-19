@@ -402,9 +402,20 @@ module.exports = knex => {
       })
       .then(user => {
         console.log('sEtting cookie in register:', user[0].id);
-
         req.session.user_id = user[0].id;
-        res.status(201).redirect(`/api/users/${user[0].id}`);
+        knex('profiles')
+          .insert({
+            user_id: user[0].id,
+            name: username,
+            email: '',
+            location: '',
+            interest1: '',
+            interest2: '',
+            interest3: ''
+          })
+          .then(() => {
+            res.status(201).redirect(`/api/users/${user[0].id}`);
+          });
       })
       .catch(err => {
         console.error('FROM catch:', err.message);
@@ -460,25 +471,20 @@ module.exports = knex => {
     const { id } = req.params;
     console.log(req.session);
     console.log(req.body, req.session.user_id);
-    //console.log('req.params:', req.params);
-    //if (id == req.session.user_id) {
     knex('profiles')
-      .insert({
+      .update({
         ...req.body,
         user_id: id
       })
       .where('user_id', id)
       .then(profile => {
         console.log('added Profile :', profile);
-        res.status(201).send(`/api/users/${id}/profile`);
+        res.status(201).redirect(`/api/users/${id}`);
       })
       .catch(err => {
         console.log(err);
         res.status(400).send('Status : 400 : Bad request');
       });
-    //} else {
-    res.status(401).send('Status : 400 : Unauthorized');
-    //}
   });
 
   // @route   POST api/users/:user_id/resourses/:resourse_id/like
@@ -508,7 +514,8 @@ module.exports = knex => {
       })
       .catch(err => {
         console.log(err);
-        res.status(400).send('Status : 400 : Bad request');
+//        res.status(400).send('Status : 400 : Bad request');
+        res.status(400).redirect(`/`);
       });
   });
 
@@ -555,11 +562,13 @@ module.exports = knex => {
       })
       .then(result => {
         console.log('result :', result);
-        res.status(201).send(`Rating added to resourse ${resourse_id}`);
+//        res.status(201).send(`Rating added to resourse ${resourse_id}`);
+        res.status(201).redirect(`/`);
       })
       .catch(err => {
         console.log(err);
-        res.status(400).send('Status : 400 : Bad request');
+//        res.status(400).send('Status : 400 : Bad request');
+          res.status(400).redirect(`/`);
       });
   });
 
