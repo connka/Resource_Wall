@@ -534,7 +534,7 @@ module.exports = knex => {
       })
       .then(result => {
         console.log('result :', result);
-        res.status(201).send(`Comment added to resourse ${resourse_id}`);
+        res.redirect("/");
       })
       .catch(err => {
         console.log(err);

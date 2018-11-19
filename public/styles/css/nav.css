@@ -32,21 +32,21 @@ header .my_toggle {
   float: right;
   border-radius: 5px;
   background-color: white;
-  color: #a9a9a9;  
+  color: #000000;  
 }
 
 #registerbtn {
   float: right;
   border-radius: 5px;
   background-color: white; 
-  color: #a9a9a9;
+  color: #000000;
 }
 
 #logoutbtn {
   float: right;
   border-radius: 5px;
   background-color: white; 
-  color: #a9a9a9;
+  color: #000000;
 }
 
 #paint {
