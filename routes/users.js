@@ -462,7 +462,8 @@ module.exports = knex => {
       })
       .catch(function(err) {
         console.error(err);
-        res.status(400).send('Message : 400 : Bad request');
+//        res.status(400).send('Message : 400 : Bad request');
+          res.status(400).redirect('/api/users/${id}');
       });
   });
 

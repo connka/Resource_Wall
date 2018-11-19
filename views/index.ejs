@@ -23,7 +23,6 @@
     <%for(let resource in allResources){%>
     <div class="resourse_archive">
         <% let avgRating = resource.totalRating/resource.countRating %>
-        <div class="submitted_by">Submitted by: <%= allResources[resource].username%></div>
       <h2 id="resourse_name" class="resourse_name"> 
         <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a></h2>
         <p id="description">Description: <%= allResources[resource].description %></p>
