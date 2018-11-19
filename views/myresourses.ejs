@@ -93,7 +93,7 @@
                   <%= allResources[resource].totalLikes %>
                 </ul>
                 <ul id="avgRating"> Rating:
-                  <%= allResources[resource].avgRating() || 0 %>
+                <%= Math.round(allResources[resource].avgRating() || 0) %>
                 </ul>
             </div>
     </div>            

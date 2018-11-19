@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const helper = require('./../helper');
 
 module.exports = knex => {
   // const getCurrentUser = req => {
@@ -129,6 +130,7 @@ module.exports = knex => {
       .then(comments => {
         comments.map(comment => {
           if (allResources[comment.resourse_id]) {
+            comment.updated_at = helper.postTime(comment);
             allResources[comment.resourse_id].comments.push(comment);
           }
         });
@@ -509,12 +511,12 @@ module.exports = knex => {
       })
       .then(result => {
         console.log('result :', result);
-//        res.status(201).send(`Like added to resource ${resourse_id}`);
-          res.status(201).redirect(`/`);
+        //        res.status(201).send(`Like added to resource ${resourse_id}`);
+        res.status(201).redirect(`/`);
       })
       .catch(err => {
         console.log(err);
-//        res.status(400).send('Status : 400 : Bad request');
+        //        res.status(400).send('Status : 400 : Bad request');
         res.status(400).redirect(`/`);
       });
   });
@@ -562,13 +564,13 @@ module.exports = knex => {
       })
       .then(result => {
         console.log('result :', result);
-//        res.status(201).send(`Rating added to resourse ${resourse_id}`);
+        //        res.status(201).send(`Rating added to resourse ${resourse_id}`);
         res.status(201).redirect(`/`);
       })
       .catch(err => {
         console.log(err);
-//        res.status(400).send('Status : 400 : Bad request');
-          res.status(400).redirect(`/`);
+        //        res.status(400).send('Status : 400 : Bad request');
+        res.status(400).redirect(`/`);
       });
   });
 
