@@ -503,7 +503,8 @@ module.exports = knex => {
       })
       .then(result => {
         console.log('result :', result);
-        res.status(201).send(`LIke added to resourse ${resourse_id}`);
+//        res.status(201).send(`Like added to resource ${resourse_id}`);
+          res.status(201).redirect(`/`);
       })
       .catch(err => {
         console.log(err);

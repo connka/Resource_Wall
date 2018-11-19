@@ -28,24 +28,10 @@ $(".comment_toggle").on("click", () => {
   $(".comment_dropdown").slideToggle();
   });
 
-  //Like Button Toggle:
-  $("likebtn").on("click", function(event) {
-    event.preventDefault();
-        $.ajax({
-            url: "/:user_id/resourses/:resourse_id/like",
-            method: "POST",
-            data: { 
-              id: $(this).val(), // < note use of 'this' here
-              likebutn: $("#likebtn").val() 
-          },
-          success: function(result) {
-              alert('ok');
-          },
-          error: function(result) {
-              alert('error');
-          }
-        });
-      });
 
+    //Login Dropdown Toggle:
+$(".login_toggle").on("click", () => {
+  $(".login_dropdown").slideToggle();
+  });
 
 })
