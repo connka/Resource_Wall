@@ -73,8 +73,8 @@ module.exports = knex => {
     knex('resourses')
       .select('*')
       .join('user_resourses', 'resourses.id', 'user_resourses.resourse_id')
-      .join('users', 'user_resourses.user_id', 'users.id')
-      .where('user_resourses.resourse_id', user_id)
+      //.join('users', 'user_resourses.user_id', 'users.id')
+      .where('user_resourses.user_id', user_id)
       .then(resources => {
         console.log('user resourses:', resources);
         resources.map(resource => {
