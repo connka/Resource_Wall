@@ -17,34 +17,14 @@
                         <button class="btn btn-default my_toggle" type="button">Search</button>
                         </span>
                         </div>
-                </div>
-                <div class="interest_id_select">
-                                <select class="interest_id" name="intrest_id">
-                                <option selected>--Resource Category--</option>
-                                <option value="1">Sports</option>
-                                <option value="2">Web Development</option>
-                                <option value="3">Food</option>
-                                <option value="4">Reading</option>
-                                <option value="5">Travelling</option>
-                                <option value="6">Fishing</option>
-                        <option value="7">Crafts</option>
-                        <option value="8">Movies</option>
-                                <option value="9">Music</option>
-                        <option value="10">Gardening</option>
-                        <option value="11">Games</option>
-                        <option value="12">Hunting</option>
-                        <option value="13">Restaurants</option>
-                                <option value="14">Cars</option>
-                                </select>
-                                </select>
-                                </div>
+                        </div>
                         </div>
                         <br />
 
     <%for(let resource in allResources){%>
     <div class="resourse_archive">
         <% let avgRating = resource.totalRating/resource.countRating %>
-        <div class="submitted_by">Submitted by: <%= allResources[resource].user_id%></div>
+        <div class="submitted_by">Submitted by: <%= allResources[resource].username%></div>
       <h2 id="resourse_name" class="resourse_name"> 
         <a href=<%= allResources[resource].url %>> <%= allResources[resource].title %> </a></h2>
         <p id="description">Description: <%= allResources[resource].description %></p>
@@ -61,8 +41,8 @@
                 <form class="like" method="POST" action="<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/like%>">
                         <button class="likebtn">I like this resource!</button></form><br>
                 <div class="col-md-2">
-                                <div class="resourse_rating">
-                                                <select class="user_resourse_rating" name="user_resourse_rating">
+                                <form class="resourse_rating" name="user_resourse_rating" method="POST" action="<%user_id%>/resourses/<%allResources[resource].resourse_id%>/rate">
+                                                <select class="user_resourse_rating">
                                                         <option selected>--Resource Rating--</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -70,8 +50,11 @@
                                                         <option value="4">4</option>
                                                         <option value="5">5</option>
                                                 </select>
-                                </div>
+                                        <button class="ratingbtn">Submit Rating</button>
+                                        </form>
                 </div>
+
+                <br><br><br>
 
         <form method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/comment" class="comment_box">
         Comment on this resource:
