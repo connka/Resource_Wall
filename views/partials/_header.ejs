@@ -17,12 +17,12 @@
             <div class=".col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0">
             <% if (user_id) { %>
                 <div id="nav_userID">
-                <p>Signed in as "<%= currentUser %>"</p>
+                <p><%= currentUser %></p>
+                <a href="/" class="btn btn-default navbar-btn" >Home</a></br>
+                <a href="/api/users/<%= user_id %>" class="btn btn-default navbar-btn">My Resources</a>
                 <form method="POST" action="/api/users/logout">
                     <button type="submit" id="logoutbtn" class="btn btn-default navbar-btn">Sign Out</button> <br><br>
                 </form>
-                <a href="/">Home</a><br>
-                <a href="/api/users/<%= user_id %>">Go to My Resources</a>
             </div>
             </div>
                 <% }  else { %>
