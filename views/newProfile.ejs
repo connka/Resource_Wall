@@ -21,7 +21,7 @@
   <h1>Edit Profile:
     <%= currentUser %>
   </h1>
-  <form method="POST" class="registration_box">
+  <form method="POST" action="/api/users/<%= user_id%>/profile" class="registration_box">
   <div id="username" >Username:
     <div class="username">
       <label for="username"></label>
@@ -29,11 +29,12 @@
            value = <%= currentUser%>></input>
     </div>
   </div>
-  <div id="username">Password:
-    <div class="password">
-      <label for="password"></label>
-      <input class="form-control z-depth-1" id="password" rows="1" type="password" name = "password" value = <% password %> ></input>
+  <div id="username">Email:
+    <div class="email">
+      <label for="email"></label>
+      <input class="form-control z-depth-1" id="email" rows="1" name="email"  type="email"></input>
     </div>
+  </div>
   </div>
   <div id="username">Location:
     <div class="location">

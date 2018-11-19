@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
   console.log('current user from top :', user_id);
   knex('resourses')
     .select('*')
-    //.join('intrests', 'intrests.id', 'resourses.intrest_id')
+    //.innerJoin('intrests', 'intrests.id', 'resourses.intrest_id')
     .then(resources => {
       resources.map(resource => {
         allResources[resource.id] = {
@@ -104,9 +104,6 @@ app.get('/', (req, res) => {
       //console.log('ALL resouses from comments ,', allResources);
       comments.map(comment => {
         let singleComment = { ...comment };
-        //console.log('Single comment:', singleComment);
-        //if (allResources[comment.resourse_id]) {
-
         allResources[comment.resourse_id].comments.push(singleComment);
         //}
       });
@@ -155,6 +152,7 @@ app.get('/', (req, res) => {
           allResources
         };
       }
+      console.log('template vars:', templateVars);
       res.status(200).render('index', templateVars);
     })
     .catch(err => {

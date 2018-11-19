@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-                <header>
+                <head>
                    
                         <link rel="stylesheet" href="/styles/css/nav.css">
                         <link rel="stylesheet" href="/styles/css/styles.css">
@@ -8,16 +8,18 @@
                         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
                         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
                         <script src="/scripts/app.js"></script>
-                </header>
+                </head>
 <header>
         <% include partials/_header %> 
         <title>"<%= currentUser %> Profile Page"</title>
+        <p>Current user id <%= user_id%></p>
 </header>
 
 <body>
                 <h1>Edit Profile: <%= currentUser %></h1>
 
-                <form method="put" action="/6/profile" >
+                <form method="POST"  action="/api/users/
+                <%= user_id%>/profile" >
                         
                 <div id = "username">Username: 
                         <div class="username">
@@ -25,10 +27,12 @@
                         <input class="form-control z-depth-1" id="username" rows="1"  name = "name" value = "
                 <%= name %>" ></input>
                         </div> </div>
-                <div id = "username">Password: 
-                        <div class="password">
-                        <label for="password"></label>
-                        <input class="form-control z-depth-1" id="password" rows="1" name="password" type= "password" 
+                <div id = "username">Email: 
+                        <div class="email">
+                        <label for="email"></label>
+                        <input class="form-control z-depth-1" id="email" rows="1" name="email" 
+                         value = "
+                        <%= email %>" type= "eamil" 
                         ></input>
                         </div> </div>
                 <div id = "username">Location: 

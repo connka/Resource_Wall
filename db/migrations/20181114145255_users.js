@@ -18,6 +18,7 @@ exports.up = function(knex, Promise) {
         .notNull()
         .onDelete('cascade');
       table.string('name');
+      table.string('password');
       table.string('email');
       table.string('location');
       table.string('interest1');
