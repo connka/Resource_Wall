@@ -9,12 +9,17 @@ module.exports = knex => {
   // @access  Public
 
   router.get('/', (req, res) => {
+    let user_id = req.session.user_id;
     let allResources = {};
     knex('resourses')
       .select('*')
+      .join('user_resourses', 'resouses.id', 'user_resourses.resouse_id')
+      .join('users', 'user_resourses.user_id', 'user.id')
       .then(resources => {
+        console.log('Inside resourses file', resources);
         resources.map(resource => {
           allResources[resource.id] = {
+            user_id,
             ...resource,
             totalLikes: 0,
             countRatings: 0,
@@ -25,7 +30,7 @@ module.exports = knex => {
             comments: []
           };
         });
-        //console.log(allResources);
+        console.log(allResources);
         return allResources;
       })
       .then(() => {
@@ -40,6 +45,7 @@ module.exports = knex => {
           .join('users', 'users.id', 'user_comments.user_id');
       })
       .then(comments => {
+        console.log('all comments:', comments);
         let allCommnets = [];
         comments.map(comment => {
           let singleComment = { ...comment };
@@ -65,7 +71,7 @@ module.exports = knex => {
         });
       })
       .then(() => {
-        console.log('ALL resources:', allResources);
+        console.log('ALL resources from main:', allResources);
         return allResources;
       })
       .then(() => {

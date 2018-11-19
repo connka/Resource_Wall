@@ -1,5 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('user_resourse_rating', function(table) {
+    table.increments('id');
     table.integer('rating').notNullable();
     table
       .integer('user_id')
@@ -10,7 +11,6 @@ exports.up = function(knex, Promise) {
       .references('id')
       .inTable('resourses')
       .onDelete('cascade');
-    table.unique(['user_id', 'resourse_id']);
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
   });
