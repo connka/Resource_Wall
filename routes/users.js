@@ -71,10 +71,12 @@ module.exports = knex => {
     let user_id = req.session.user_id;
     console.log('CURRENT USER ALEX :', user_id);
     knex('resourses')
-      .select()
+      .select('*')
       .join('user_resourses', 'resourses.id', 'user_resourses.resourse_id')
+      .join('users', 'user_resourses.user_id', 'users.id')
       .where('user_resourses.resourse_id', user_id)
       .then(resources => {
+        console.log('user resourses:', resources);
         resources.map(resource => {
           allResources[resource.id] = {
             user_id,
@@ -95,9 +97,9 @@ module.exports = knex => {
           .join('user_likes', 'user_likes.resourse_id', 'resourses.id')
           .where('user_likes.user_id', user_id)
           .then(likedResourses => {
-            //console.log('liked resourses:', likedResourses);
+            console.log('liked resourses:', likedResourses);
             likedResourses.map(resource => {
-              //delete allResources[resource.id];
+              delete allResources[resource.id];
               allResources[resource.id] = {
                 user_id,
                 ...resource,
@@ -113,7 +115,7 @@ module.exports = knex => {
           });
       })
       .then(() => {
-        //console.log('All resourses', allResources);
+        console.log('All resourses', allResources);
         return knex('user_comments')
           .select(
             'user_comments.id',
@@ -154,13 +156,13 @@ module.exports = knex => {
         });
       })
       .then(() => {
-        //console.log(allResources);
+        console.log(allResources);
         return knex('users')
           .select('username')
           .where('id', user_id);
       })
       .then(user => {
-        //console.log('Inside knex:', user[0].username);
+        console.log('Inside knex:', user[0].username);
         let templateVars = {
           currentUser: user[0].username,
           user_id,
@@ -205,6 +207,57 @@ module.exports = knex => {
           // res.status(404).send('Mesaage : 404 :No resourses found');
           res.status(404).redirect(`/api/users/${id}/profile`);
         });
+    } else {
+      res.status(401).redirect(`/api/users/${id}`);
+    }
+  });
+
+  // @route GET  api/users/:id/profile
+  // @desc  get logged in users profile
+  // @access  Private
+
+  router.get('/:id/profile/new', (req, res) => {
+    const { id } = req.params;
+    //console.log(req.session.user_id);
+    const user_id = req.session.user_id;
+    if (id == req.session.user_id) {
+      // let teplateVars = { user_id, currentUser };
+      knex('users')
+        .returning()
+        .select()
+        .where('id', user_id)
+        .then(result => {
+          console.log('current user:', result);
+
+          res.status(200).render('newProfile', {
+            user_id: result[0].id,
+            password: result[0].id,
+            currentUser: result[0].username
+          });
+        });
+
+      //res.status(200).render('userpage',{userName:});
+      // knex
+      //   .select('*')
+      //   .from('profiles')
+      //   .where('user_id', id)
+      //   .then(profile => {
+      //     console.log(profile);
+      //     if (profile[0]) {
+      //       res.render('userpage', {
+      //         user_id: profile[0].user_id,
+      //         currentUser: profile[0].name,
+      //         ...profile[0]
+      //       });
+      //     } else {
+      //       res.status(404).send('404 : NO PROFILE FOUND');
+      //     }
+      // }
+      // .catch(err => {
+      //   //console.log(err);
+      //   // res.status(404).send('Mesaage : 404 :No resourses found');
+      //   res.status(404).redirect(`/api/users/${id}/profile`);
+      // });
     } else {
       res.status(401).redirect(`/api/users/${id}`);
     }
@@ -400,7 +453,7 @@ module.exports = knex => {
       });
   });
 
-  // @route   PUT  api/users/:id/profile
+  // @route   POST  api/users/:id/profile
   // @desc  update logged in users profile
   // @access  Private
   router.post('/:id/profile', (req, res) => {
@@ -630,14 +683,19 @@ module.exports = knex => {
       .transaction(function(t) {
         return knex('user_resourses')
           .transacting(t)
-          .where({ user_id: user_id, resourse_id: resourse_id })
+          .where({
+            user_id: user_id,
+            resourse_id: resourse_id
+          })
           .delete()
           .returning('*')
           .then(function(response) {
             console.log('RESPONSE:', response);
             return knex('resourses')
               .transacting(t)
-              .where({ id: resourse_id })
+              .where({
+                id: resourse_id
+              })
               .delete()
               .returning('*');
           })

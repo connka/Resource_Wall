@@ -12,6 +12,8 @@ module.exports = knex => {
     let allResources = {};
     knex('resourses')
       .select('*')
+      .join('user_resourses', 'resouses.id', 'user_resourses.resouse_id')
+      .join('users', 'user_resourses.user_id', 'user.id')
       .then(resources => {
         resources.map(resource => {
           allResources[resource.id] = {
@@ -25,7 +27,7 @@ module.exports = knex => {
             comments: []
           };
         });
-        //console.log(allResources);
+        console.log(allResources);
         return allResources;
       })
       .then(() => {
@@ -40,6 +42,7 @@ module.exports = knex => {
           .join('users', 'users.id', 'user_comments.user_id');
       })
       .then(comments => {
+        console.log('all comments:', comments);
         let allCommnets = [];
         comments.map(comment => {
           let singleComment = { ...comment };
@@ -65,7 +68,7 @@ module.exports = knex => {
         });
       })
       .then(() => {
-        console.log('ALL resources:', allResources);
+        console.log('ALL resources from main:', allResources);
         return allResources;
       })
       .then(() => {

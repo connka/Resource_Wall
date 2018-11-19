@@ -6,7 +6,6 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('profiles').insert([
         {
-          id: 1,
           user_id: '1',
           name: 'user1',
           email: 'user1@example.com',
@@ -16,7 +15,6 @@ exports.seed = function(knex, Promise) {
           interest3: 'magic'
         },
         {
-          id: 2,
           user_id: '2',
           name: 'user2',
           email: 'user2@example.com',
@@ -26,7 +24,6 @@ exports.seed = function(knex, Promise) {
           interest3: 'travelling'
         },
         {
-          id: 3,
           user_id: '3',
           name: 'user3',
           email: 'user3@example.com',
@@ -36,7 +33,6 @@ exports.seed = function(knex, Promise) {
           interest3: 'softball'
         },
         {
-          id: 4,
           user_id: '4',
           name: 'user4',
           email: 'user4@example.com',
@@ -46,7 +42,6 @@ exports.seed = function(knex, Promise) {
           interest3: 'restaurants'
         },
         {
-          id: 5,
           user_id: '5',
           name: 'user5',
           email: 'user5@example.com',
@@ -56,7 +51,6 @@ exports.seed = function(knex, Promise) {
           interest3: 'magic'
         },
         {
-          id: 6,
           user_id: '6',
           name: 'user6',
           email: 'user6@example.com',
