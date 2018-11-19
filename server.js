@@ -18,6 +18,7 @@ const cookieSession = require('cookie-session');
 // Seperated Routes for each Resource
 const usersRoutes = require('./routes/users');
 const resoursesRoutes = require('./routes/resourses');
+const helper = require('./helper');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -70,7 +71,14 @@ app.get('/', (req, res) => {
   console.log('current user from top :', user_id);
   knex('resourses')
     .select('*')
-    //.innerJoin('intrests', 'intrests.id', 'resourses.intrest_id')
+    //.leftOuterJoin('intrests', 'intrests.id', 'resourse.intrest_id')
+    // .leftOuterJoin(
+    //   'user_resourses',
+    //   'user_resourses.resourses_id',
+    //   'resourses.id'
+    // )
+    //.leftOuterJoin('users', 'users.id', 'resourses.')
+
     .then(resources => {
       resources.map(resource => {
         allResources[resource.id] = {
@@ -102,7 +110,10 @@ app.get('/', (req, res) => {
     .then(comments => {
       //let allCommnets = [];
       //console.log('ALL resouses from comments ,', allResources);
+      //console.log('Helper:', helper.postTime);
       comments.map(comment => {
+        comment.updated_at = helper.postTime(comment);
+        //console.log(typeof comment.updated_at.getTime());
         let singleComment = { ...comment };
         allResources[comment.resourse_id].comments.push(singleComment);
         //}
@@ -146,11 +157,7 @@ app.get('/', (req, res) => {
           allResources
         };
       } else {
-        templateVars = {
-          currentUser: null,
-          user_id: null,
-          allResources
-        };
+        templateVars = { currentUser: null, user_id: null, allResources };
       }
       console.log('template vars:', templateVars);
       res.status(200).render('index', templateVars);

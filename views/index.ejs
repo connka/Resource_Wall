@@ -29,7 +29,7 @@
         <p id="description">Description: <%= allResources[resource].description %></p>
       <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
-      <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
+      <ul id="avgRating"> Rating: <%= Math.round(allResources[resource].avgRating() || 0) %></ul>
 </p>
       <% if (user_id) { %>
       <button class="comment_toggle">Leave Feedback</button>
