@@ -58,7 +58,8 @@
 
 
         <div hidden class="comment_dropdown">
-                <button class="likebtn" method="POST" action="<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/like%>">I like this resource!</button><br>
+                <form class="like" method="POST" action="<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/like%>">
+                        <button class="likebtn">I like this resource!</button></form><br>
                 <div class="col-md-2">
                                 <div class="resourse_rating">
                                                 <select class="user_resourse_rating" name="user_resourse_rating">

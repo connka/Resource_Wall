@@ -28,16 +28,4 @@ $(".comment_toggle").on("click", () => {
   $(".comment_dropdown").slideToggle();
   });
 
-  // //Like Button Toggle:
-  // $(".likebtn").on("click", function(event) {
-  //   event.preventDefault();
-  //         $.ajax({
-  //           url: "<%= user_id%>/resourses/<%= allResources[resource].resourse_id%>/like%>",
-  //           method: "POST",
-  //           data: $(this).serialize(),
-  //           success: like => {
-  //               $(".comment_dropdown").prepend();
-  //           }
-  //       });
-  //   }
 });
