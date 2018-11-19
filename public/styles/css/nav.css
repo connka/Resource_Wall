@@ -10,6 +10,10 @@ header {
   color: #000000;
 }
 
+body {
+  background-color: #383838 !important;
+}
+
 .registration_box textarea {
   width: 100%;
   padding: 5px; }
