@@ -31,9 +31,6 @@
       <ul id="intrest">Category: <%= allResources[resource].intrest_id %></ul>
       <ul id="like">Likes: <%= allResources[resource].totalLikes %></ul>
       <ul id="avgRating"> Rating: <%= allResources[resource].avgRating() || 0 %></ul>
-      <p> show me <%= allResources[resource].id%> </p>
-<p> show me id
-<%= user_id%>
 </p>
       <% if (user_id) { %>
       <button class="comment_toggle">Give feedback on this resource</button>
@@ -41,10 +38,8 @@
 </div>
 
 
-        <div class="comment_dropdown">
+        <div hidden class="comment_dropdown">
                 <form class="like" method="POST" action="/api/users/<%= user_id%>/resourses/<%= allResources[resource].id%>/like">
-                        
-
         <button class="likebtn">I like this resource!</button></form><br>
                 <div class="col-md-2">
         <form class="resourse_rating" method="POST" action="api/users/<%= user_id%>/resourses/<%= allResources[resource].id%>/rate">
